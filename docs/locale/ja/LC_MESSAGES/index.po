@@ -1,0 +1,47 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Yahoo Japan Corporation
+# Copyright (C) 2024, LY Corporation
+# This file is distributed under the same license as the k2hr3client
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: k2hr3client \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-01 13:58+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../index.rst:4
+msgid "Contents:"
+msgstr "内容"
+
+#: ../../index.rst:2
+msgid "Welcome to k2hr3client's documentation!"
+msgstr "k2hr3clientのドキュメントへようこそ"
+
+#: ../../index.rst:15
+msgid "Indices and tables"
+msgstr "一覧"
+
+#: ../../index.rst:17
+msgid ":ref:`genindex`"
+msgstr "索引"
+
+#: ../../index.rst:18
+msgid ":ref:`modindex`"
+msgstr "モジュール索引"
+
+#: ../../index.rst:19
+msgid ":ref:`search`"
+msgstr "検索"
+

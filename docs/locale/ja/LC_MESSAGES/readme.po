@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Yahoo Japan Corporation
+# Copyright (C) 2024, LY Corporation
+# This file is distributed under the same license as the k2hr3client
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: k2hr3client \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-01 13:58+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../../README.rst:3
+msgid "k2hr3client_python"
+msgstr ""
+
+#: ../../../README.rst:25
+msgid "Overview"
+msgstr "概要"
+
+#: ../../../README.rst:27
+msgid "k2hr3client_python is an official Python WebAPI client for `k2hr3`_."
+msgstr "k2hr3client_python はK2HR3の公式Pythonクライアントです"
+
+#: ../../../README.rst:35
+msgid "Install"
+msgstr "インストール"
+
+#: ../../../README.rst:37
+msgid "Let's install k2hr3client_python using pip::"
+msgstr "pipを使ってk2hr3client_pythonをインストールしましょう"
+
+#: ../../../README.rst:43
+msgid "Usage"
+msgstr "使い方"
+
+#: ../../../README.rst:45
+msgid "Let's try to get a token and create a resource.::"
+msgstr "K2HR3トークンを取得して、リソースを作ろう"
+
+#: ../../../README.rst:82
+msgid "Development"
+msgstr "開発"
+
+#: ../../../README.rst:84
+msgid ""
+"Clone this repository and go into the directory, then run the following "
+"command::"
+msgstr "このレポジトリを複製後、ソースコードのディレクトリに移動し、次のコマンドを実行します"
+
+#: ../../../README.rst:92
+msgid "Documents"
+msgstr "ドキュメント"
+
+#: ../../../README.rst:94
+msgid "Here are documents including other components."
+msgstr "こちらのドキュメントは、他のコンポーネントも含んでいます"
+
+#: ../../../README.rst:96
+msgid "`Document top page`_"
+msgstr "ドキュメントトップ"
+
+#: ../../../README.rst:98
+msgid "`About K2HR3`_"
+msgstr "K2HR3について"
+
+#: ../../../README.rst:100
+msgid "`About AntPickax`_"
+msgstr "AntPickaxについて"
+
+#: ../../../README.rst:111
+msgid "Packages"
+msgstr "パッケージ"
+
+#: ../../../README.rst:113
+msgid "Here are packages including other components."
+msgstr "こちらのドキュメントは、他のコンポーネントも含んでいます"
+
+#: ../../../README.rst:115
+msgid "`k2hr3client(python packages)`_"
+msgstr "k2hr3clientパッケージ"
+
+#: ../../../README.rst:121
+msgid "License"
+msgstr "ライセンス"
+
+#: ../../../README.rst:123
+msgid "MIT License. See the LICENSE file."
+msgstr ""
+
+#: ../../../README.rst:127
+msgid "AntPickax"
+msgstr ""
+
+#: ../../../README.rst:129
+msgid ""
+"**k2hr3client_python** is a project by AntPickax_, which is an open "
+"source team in `LY Corporation`_."
+msgstr "k2hr3client_pythonは、 `LY Corporation`_ の AntPickax_ によるプロジェクトです。"
+

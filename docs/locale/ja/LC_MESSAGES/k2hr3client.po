@@ -1,0 +1,656 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, Yahoo Japan Corporation
+# Copyright (C) 2024, LY Corporation
+# This file is distributed under the same license as the k2hr3client
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: k2hr3client \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-01 13:58+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../k2hr3client.rst:2
+msgid "k2hr3client package"
+msgstr "k2hr3clientパッケージ"
+
+#: ../../k2hr3client.rst:5
+msgid "Submodules"
+msgstr "サブモジュール"
+
+#: ../../k2hr3client.rst:8
+msgid "k2hr3client.acr module"
+msgstr "k2hr3client.acrモジュール"
+
+#: k2hr3client.acr:1 of
+msgid "K2HR3 Python Client of ACR API."
+msgstr "K2HR3 ACR APIのPythonクライアント"
+
+#: k2hr3client.acr.K2hr3Acr:1 k2hr3client.extdata.K2hr3Extdata:1
+#: k2hr3client.list.K2hr3List:1 k2hr3client.policy.K2hr3Policy:1
+#: k2hr3client.resource.K2hr3Resource:1 k2hr3client.role.K2hr3Role:1
+#: k2hr3client.service.K2hr3Service:1 k2hr3client.tenant.K2hr3Tenant:1
+#: k2hr3client.token.K2hr3RoleToken:1 k2hr3client.token.K2hr3RoleTokenList:1
+#: k2hr3client.token.K2hr3Token:1 k2hr3client.userdata.K2hr3Userdata:1
+#: k2hr3client.version.K2hr3Version:1 of
+msgid "Bases: :py:class:`~k2hr3client.api.K2hr3Api`"
+msgstr "k2hr3client.api.K2hr3Apiを継承"
+
+#: k2hr3client.acr.K2hr3Acr:1 of
+msgid "Relationship with K2HR3 ACR API."
+msgstr "K2HR3 ACR APIとの関連性"
+
+#: k2hr3client.acr.K2hr3Acr:3 of
+msgid "See https://k2hr3.antpick.ax/api_acr.html"
+msgstr "https://k2hr3.antpick.ax/api_acr.html を参照"
+
+#: k2hr3client.acr.K2hr3Acr.add_member:1 of
+msgid "Add the members."
+msgstr "メンバーを追加する"
+
+#: k2hr3client.acr.K2hr3Acr.delete_member:1 of
+msgid "Delete the members."
+msgstr "メンバーを削除する"
+
+#: k2hr3client.acr.K2hr3Acr.get_available_resources:1 of
+msgid "Show the available resources."
+msgstr "利用可能なリソースを表示する"
+
+#: k2hr3client.acr.K2hr3Acr.r3token:1 k2hr3client.list.K2hr3List.r3token:1
+#: k2hr3client.policy.K2hr3Policy.r3token:1
+#: k2hr3client.resource.K2hr3Resource.r3token:1
+#: k2hr3client.role.K2hr3Role.r3token:1
+#: k2hr3client.service.K2hr3Service.r3token:1
+#: k2hr3client.tenant.K2hr3Tenant.r3token:1
+#: k2hr3client.token.K2hr3RoleToken.r3token:1
+#: k2hr3client.token.K2hr3RoleTokenList.r3token:1 of
+msgid "Return the r3token."
+msgstr "K2HR3のトークンを返す"
+
+#: k2hr3client.acr.K2hr3Acr.service:1
+#: k2hr3client.extdata.K2hr3Extdata.extapi_name:1
+#: k2hr3client.extdata.K2hr3Extdata.register_path:1
+#: k2hr3client.extdata.K2hr3Extdata.user_agent:1
+#: k2hr3client.userdata.K2hr3Userdata.userdatapath:1 of
+msgid "Return the tenant."
+msgstr "テナントを返す"
+
+#: k2hr3client.acr.K2hr3Acr.show_credential_details:1 of
+msgid "Show the credential details."
+msgstr "認証クレデンシャルの詳細を表示する"
+
+#: ../../k2hr3client.rst:16
+msgid "k2hr3client.api module"
+msgstr "k2hr3client.apiモジュール"
+
+#: k2hr3client.api:1 k2hr3client.http:1 of
+msgid "k2hr3client - Python library for K2HR3 API."
+msgstr "K2HR3 APIのPythonライブラリ"
+
+#: k2hr3client.api.K2hr3Api:1 of
+msgid "Bases: :py:class:`~abc.ABC`"
+msgstr "abc.ABCを継承"
+
+#: k2hr3client.api.K2hr3Api:1 of
+msgid "Base class of all K2HR3 WebAPIs."
+msgstr "K2HR3 WebAPIの基底クラス"
+
+#: k2hr3client.api.K2hr3Api.basepath:1 of
+msgid "Return the base url path."
+msgstr "基本URLパス"
+
+#: k2hr3client.api.K2hr3Api.body:1 of
+msgid "Return the request body."
+msgstr "リクエストボディを返す"
+
+#: k2hr3client.api.K2hr3Api.headers:1 k2hr3client.http.K2hr3Http.headers:1 of
+msgid "Return the request headers."
+msgstr "リクエストヘッダを返す"
+
+#: k2hr3client.api.K2hr3Api.resp:1 of
+msgid "Return the response struct."
+msgstr "レスポンス構造体を返す"
+
+#: k2hr3client.api.K2hr3Api.set_response:1 of
+msgid "Set the API responses in K2hr3Http class."
+msgstr "K2hr3Httpクラス内部でAPIレスポンスをセットする"
+
+#: k2hr3client.api.K2hr3Api.urlparams:1 of
+msgid "Return the url params."
+msgstr "URLパラメータを返す"
+
+#: k2hr3client.api.K2hr3Api.version:1 of
+msgid "Return the version string."
+msgstr "APIバージョン文字列を返す"
+
+#: k2hr3client.api.K2hr3ApiResponse:1 k2hr3client.http.K2hr3Http:1
+#: k2hr3client.role.K2hr3RoleHost:1 k2hr3client.role.K2hr3RoleHostList:1 of
+msgid "Bases: :py:class:`object`"
+msgstr "objectクラスを継承"
+
+#: k2hr3client.api.K2hr3ApiResponse:1 of
+msgid "K2hr3ApiResponse stores the response of K2HR3 WebAPI."
+msgstr "K2HR3 WebAPIのレスポンスを保存する"
+
+#: k2hr3client.api.K2hr3ApiResponse:3 of
+msgid "The members are set by setter methods only one time."
+msgstr "メンバーは一度だけセットされます"
+
+#: k2hr3client.api.K2hr3ApiResponse.body:1 of
+msgid "Return the body."
+msgstr "レスポンスボディを返す"
+
+#: k2hr3client.api.K2hr3ApiResponse.code:1 of
+msgid "Return the status code."
+msgstr "ステータスコードを返す"
+
+#: k2hr3client.api.K2hr3ApiResponse.hdrs:1 of
+msgid "Return the header."
+msgstr "レスポンスヘッダを返す"
+
+#: k2hr3client.api.K2hr3ApiResponse.url:1 of
+msgid "Return the request url."
+msgstr "リクエストURLを返す"
+
+#: k2hr3client.api.K2hr3HTTPMethod:1 k2hr3client.role.K2hr3TokenType:1
+#: k2hr3client.token.K2hr3AuthType:1 of
+msgid "Bases: :py:class:`~enum.Enum`"
+msgstr "enumクラスを継承"
+
+#: k2hr3client.api.K2hr3HTTPMethod:1 of
+msgid "HTTPMethod."
+msgstr ""
+
+#: ../../k2hr3client.rst:24
+msgid "k2hr3client.exception module"
+msgstr "k2hr3client.exceptionモジュール"
+
+#: k2hr3client.exception:1 of
+msgid "K2HR3 Python Client of Exception."
+msgstr "K2HR3 Pythonライブラリの例外クラス"
+
+#: k2hr3client.exception.K2hr3Exception:1 of
+msgid "Bases: :py:class:`Exception`"
+msgstr "Exceptionクラスを継承"
+
+#: k2hr3client.exception.K2hr3Exception:1 of
+msgid "Exception classes for K2HR3 Python Client."
+msgstr "K2HR3 Pythonクライアントの例外クラス"
+
+#: ../../k2hr3client.rst:32
+msgid "k2hr3client.extdata module"
+msgstr "k2hr3client.extdataモジュール"
+
+#: k2hr3client.extdata:1 of
+msgid "k2hr3client - Python library for k2hr3 Extdata API."
+msgstr "K2HR3 Extdata APIのPythonクライアント"
+
+#: k2hr3client.extdata.K2hr3Extdata:1 of
+msgid "Relationship with K2HR3 EXTDATA API."
+msgstr "K2HR3 Extdata APIとの関連性"
+
+#: k2hr3client.extdata.K2hr3Extdata:3 of
+msgid "See https://k2hr3.antpick.ax/api_extdata.html for details."
+msgstr "https://k2hr3.antpick.ax/api_extdata.html を参照する"
+
+#: k2hr3client.extdata.K2hr3Extdata.acquires_template:1 of
+msgid "Set a request to acquire a template."
+msgstr "テンプレートを取得するためのリクエストをセットする"
+
+#: ../../k2hr3client.rst:40
+msgid "k2hr3client.http module"
+msgstr "k2hr3client.httpモジュール"
+
+#: k2hr3client.http.K2hr3Http:1 of
+msgid "K2hr3Http sends a http/https request to the K2hr3 WebAPI."
+msgstr "K2HR3 WebAPIにHTTP/HTTPSリクエストを送信する"
+
+#: k2hr3client.http.K2hr3Http:3 of
+msgid "Most oif the members are set by setter methods only one time."
+msgstr "ほとんどのメンバーは一度だけセットされます"
+
+#: k2hr3client.http.K2hr3Http.DELETE:1 of
+msgid "Send requests by using DELETE Method."
+msgstr "DELETEメソッドを使ってリクエストを送信する"
+
+#: k2hr3client.http.K2hr3Http.GET:1 k2hr3client.http.K2hr3Http.HEAD:1 of
+msgid "Send requests by using GET Method."
+msgstr "GETメソッドを使ってリクエストを送信する"
+
+#: k2hr3client.http.K2hr3Http.POST:1 of
+msgid "Send requests by using POST Method."
+msgstr "POSTメソッドを使ってリクエストを送信する"
+
+#: k2hr3client.http.K2hr3Http.PUT:1 of
+msgid "Send requests by using PUT Method."
+msgstr "PUTメソッドを使ってリクエストを送信する"
+
+#: k2hr3client.http.K2hr3Http.baseurl:1 k2hr3client.http.K2hr3Http.url:1 of
+msgid "Returns the url."
+msgstr "URLを返す"
+
+#: k2hr3client.http.K2hr3Http.urlparams:1 of
+msgid "Returns the urlparams."
+msgstr "URLパラメータを返す"
+
+#: ../../k2hr3client.rst:48
+msgid "k2hr3client.list module"
+msgstr "k2hr3client.listモジュール"
+
+#: k2hr3client.list:1 of
+msgid "K2HR3 Python Client of List API."
+msgstr "K2HR3 List APIのPythonクライアント"
+
+#: k2hr3client.list.K2hr3List:1 of
+msgid "Relationship with K2HR3 LIST API."
+msgstr "K2HR3 List APIとの関連性"
+
+#: k2hr3client.list.K2hr3List:3 of
+msgid "See https://k2hr3.antpick.ax/api_list.html"
+msgstr "https://k2hr3.antpick.ax/api_list.html を参照する"
+
+#: k2hr3client.list.K2hr3List.get:1 of
+msgid "List K2HR3's SERVICE, RESOURCE, POLICY and ROLE in YRN form."
+msgstr "YRN形式でK2HR3's SERVICE, RESOURCE, POLICY および ROLEの一覧を表示する"
+
+#: k2hr3client.list.K2hr3List.service:1 of
+msgid "Return the service."
+msgstr "サービスを返す"
+
+#: k2hr3client.list.K2hr3List.validate:1 of
+msgid "Validate the objects."
+msgstr "オブジェクトの有効性を確認する"
+
+#: ../../k2hr3client.rst:56
+msgid "k2hr3client.policy module"
+msgstr "k2hr3client.policyモジュール"
+
+#: k2hr3client.policy:1 of
+msgid "K2HR3 Python Client of Policy API."
+msgstr "K2HR3 Policy APIのPythonクライアント"
+
+#: k2hr3client.policy.K2hr3Policy:1 of
+msgid "Relationship with K2HR3 POLICY API."
+msgstr "K2HR3 POLICY APIとの関連性"
+
+#: k2hr3client.policy.K2hr3Policy:3 of
+msgid "See https://k2hr3.antpick.ax/api_policy.html for details."
+msgstr "https://k2hr3.antpick.ax/api_policy.html を参照する"
+
+#: k2hr3client.policy.K2hr3Policy.create:1 of
+msgid "Create policies."
+msgstr "ポリシーを作成する"
+
+#: k2hr3client.policy.K2hr3Policy.delete:1 of
+msgid "Delete policies."
+msgstr "ポリシーを削除する"
+
+#: k2hr3client.policy.K2hr3Policy.get:1 of
+msgid "Get policies."
+msgstr "ポリシーを取得する"
+
+#: k2hr3client.policy.K2hr3Policy.validate:1 of
+msgid "Validate policies."
+msgstr "ポリシーの有効性を確認する"
+
+#: ../../k2hr3client.rst:64
+msgid "k2hr3client.resource module"
+msgstr "k2hr3client.resourceモジュール"
+
+#: k2hr3client.resource:1 of
+msgid "K2HR3 Python Client of Resource API."
+msgstr "K2HR3 Resource APIのPythonクライアント"
+
+#: k2hr3client.resource.K2hr3Resource:1 of
+msgid "Relationship with K2HR3 RESOURCE API."
+msgstr "K2HR3 RESOURCE APIとの関連性"
+
+#: k2hr3client.resource.K2hr3Resource:3 of
+msgid "See https://k2hr3.antpick.ax/api_resource.html for details."
+msgstr "https://k2hr3.antpick.ax/api_resource.html を参照する"
+
+#: k2hr3client.resource.K2hr3Resource.create_conf_resource:1 of
+msgid "Create the resource."
+msgstr "リソースを作成する"
+
+#: k2hr3client.resource.K2hr3Resource.data:1 of
+msgid "Return data."
+msgstr "データを返す"
+
+#: k2hr3client.resource.K2hr3Resource.delete_with_notoken:1 of
+msgid "Delete the resource without token."
+msgstr "ロールトークン情報なしでリソースを削除する"
+
+#: k2hr3client.resource.K2hr3Resource.delete_with_roletoken:1 of
+msgid "Delete the resource with role token."
+msgstr "ロールトークン情報をつけてリソースを削除する"
+
+#: k2hr3client.resource.K2hr3Resource.delete_with_scopedtoken:1 of
+msgid "Delete the resource with scoped token."
+msgstr "スコープトークン情報をつけてリソースを削除する"
+
+#: k2hr3client.resource.K2hr3Resource.get:1 of
+msgid "Get the resource."
+msgstr "リソースを取得する"
+
+#: k2hr3client.resource.K2hr3Resource.get_with_roletoken:1 of
+msgid "Get the resource with roletoken."
+msgstr "ロールトークン情報をつけてリソースを取得する"
+
+#: k2hr3client.resource.K2hr3Resource.resource_path:1 of
+msgid "Return the resource_path."
+msgstr "リソースパスを返す"
+
+#: k2hr3client.resource.K2hr3Resource.roletoken:1 of
+msgid "Return the roletoken."
+msgstr "ロールトークンを返す"
+
+#: k2hr3client.resource.K2hr3Resource.validate:1 of
+msgid "Validate the resource."
+msgstr "リソースの有効性を確認する"
+
+#: k2hr3client.resource.K2hr3Resource.validate_with_notoken:1 of
+msgid "Validate the resource without tokens."
+msgstr "トークンなしでリソースの有効性を確認する"
+
+#: ../../k2hr3client.rst:72
+msgid "k2hr3client.role module"
+msgstr "k2hr3client.roleモジュール"
+
+#: k2hr3client.role:1 of
+msgid "K2HR3 Python Client of Role API."
+msgstr "K2HR3 Role APIのPythonクライアント"
+
+#: k2hr3client.role.K2hr3Role:1 of
+msgid "Relationship with K2HR3 ROLE API."
+msgstr "K2HR3 ROLE APIとの関連性"
+
+#: k2hr3client.role.K2hr3Role:3 of
+msgid "See https://k2hr3.antpick.ax/api_role.html"
+msgstr "https://k2hr3.antpick.ax/api_role.html を参照する"
+
+#: k2hr3client.role.K2hr3Role.add_member:1 of
+msgid "Add a member to the role."
+msgstr "ロールにメンバーを追加する"
+
+#: k2hr3client.role.K2hr3Role.add_member_with_roletoken:1 of
+msgid "Add members to the role without roletoken."
+msgstr "ロールトークンなしでロールにメンバーを追加する"
+
+#: k2hr3client.role.K2hr3Role.add_members:1 of
+msgid "Add members to the role."
+msgstr "メンバーをロールに追加する"
+
+#: k2hr3client.role.K2hr3Role.create:1 k2hr3client.token.K2hr3Token.create:1 of
+msgid "Create tokens."
+msgstr "トークンを作成する"
+
+#: k2hr3client.role.K2hr3Role.delete:1 of
+msgid "Delete role."
+msgstr "ロールを削除する"
+
+#: k2hr3client.role.K2hr3Role.delete_member:1 of
+msgid "Delete host."
+msgstr "ホストを削除する"
+
+#: k2hr3client.role.K2hr3Role.delete_member_wo_roletoken:1 of
+msgid "Delete host without roletoken."
+msgstr "ロールトークン情報なしでホストを削除する"
+
+#: k2hr3client.role.K2hr3Role.delete_roletoken:1 of
+msgid "Delete roletoken."
+msgstr "ロールトークンを削除する"
+
+#: k2hr3client.role.K2hr3Role.delete_roletoken_with_string:1 of
+msgid "Delete roletoken without role."
+msgstr "ロール情報なしでロールトークンを削除する"
+
+#: k2hr3client.role.K2hr3Role.get:1 of
+msgid "Show role details."
+msgstr "ロールの詳細を表示する"
+
+#: k2hr3client.role.K2hr3Role.get_token_list:1 of
+msgid "Show token list."
+msgstr "トークンの一覧を表示する"
+
+#: k2hr3client.role.K2hr3Role.validate_role:1 of
+msgid "Validate role."
+msgstr "ロールの有効性を確認する"
+
+#: k2hr3client.role.K2hr3RoleHost:1 of
+msgid "Represent a host of a role."
+msgstr "ロールのホストを表す"
+
+#: k2hr3client.role.K2hr3RoleHost:3 k2hr3client.role.K2hr3RoleHostList:3 of
+msgid "NOTE(hiwakaba): This class exists only for backward compatibility."
+msgstr "このクラスは後方互換性を維持するためのクラスです"
+
+#: k2hr3client.role.K2hr3RoleHostList:1 of
+msgid "Represent a list of hosts of a role."
+msgstr "ロールのホストの一覧を表す"
+
+#: k2hr3client.role.K2hr3RoleHostList.add_host:1 of
+msgid "Add hosts to the list."
+msgstr "ロールホスト一覧にホストを追加する"
+
+#: k2hr3client.role.K2hr3TokenType:1 of
+msgid "Represent a type of token."
+msgstr "トークンのタイプを表す"
+
+#: ../../k2hr3client.rst:80
+msgid "k2hr3client.service module"
+msgstr "k2hr3client.serviceモジュール"
+
+#: k2hr3client.service:1 of
+msgid "K2HR3 Python Client of Service API."
+msgstr "K2HR3 Service APIのPythonクライアント"
+
+#: k2hr3client.service.K2hr3Service:1 of
+msgid "Relationship with K2HR3 SERVICE API."
+msgstr "K2HR3 SERVICE APIとの関連性"
+
+#: k2hr3client.service.K2hr3Service:3 of
+msgid "See https://k2hr3.antpick.ax/api_service.html for details."
+msgstr "https://k2hr3.antpick.ax/api_service.html を参照する"
+
+#: k2hr3client.service.K2hr3Service.add_member:1 of
+msgid "Add members to services."
+msgstr "サービスにメンバーを追加する"
+
+#: k2hr3client.service.K2hr3Service.create:1 of
+msgid "Create services."
+msgstr "サービスを作る"
+
+#: k2hr3client.service.K2hr3Service.delete:1 of
+msgid "Delete services."
+msgstr "サービスを削除する"
+
+#: k2hr3client.service.K2hr3Service.delete_tenant:1 of
+msgid "Delete tenants."
+msgstr "テナントを削除する"
+
+#: k2hr3client.service.K2hr3Service.get:1 of
+msgid "Get services."
+msgstr "サービスを取得する"
+
+#: k2hr3client.service.K2hr3Service.modify:1 of
+msgid "Modify services."
+msgstr "サービスを変更する"
+
+#: k2hr3client.service.K2hr3Service.validate:1 of
+msgid "Validate services."
+msgstr "サービスの有効性を確認する"
+
+#: ../../k2hr3client.rst:88
+msgid "k2hr3client.tenant module"
+msgstr "k2hr3client.tenantモジュール"
+
+#: k2hr3client.tenant:1 of
+msgid "K2HR3 Python Client of Tenant API."
+msgstr "K2HR3 Tenant APIのPythonクライアント"
+
+#: k2hr3client.tenant.K2hr3Tenant:1 of
+msgid "Relationship with K2HR3 TENANT API."
+msgstr "K2HR3 TENANT APIとの関連性"
+
+#: k2hr3client.tenant.K2hr3Tenant:3 of
+msgid "See https://k2hr3.antpick.ax/api_tenant.html for details."
+msgstr "https://k2hr3.antpick.ax/api_tenant.html を参照する"
+
+#: k2hr3client.tenant.K2hr3Tenant.create:1 of
+msgid "Create a new K2HR3 cluster Local Tenant(TENANT)."
+msgstr "K2HR3クラスタのローカルテナントを作成する"
+
+#: k2hr3client.tenant.K2hr3Tenant.delete:1 of
+msgid "Completely delete the Local Tenant(TENANT)."
+msgstr "K2HR3クラスタのローカルテナントを削除する"
+
+#: k2hr3client.tenant.K2hr3Tenant.delete_user:1 of
+msgid "Make the USER unavailable to the K2HR3 cluster Local Tenant(TENANT)."
+msgstr "K2HR3クラスタのローカルテナントに対して無効にする"
+
+#: k2hr3client.tenant.K2hr3Tenant.get:1 of
+msgid "Get the K2HR3 cluster Local Tenant(TENANT) information."
+msgstr "K2HR3クラスタのローカルテナントの情報を取得する"
+
+#: k2hr3client.tenant.K2hr3Tenant.get_tenant_list:1 of
+msgid "List the K2HR3 cluster Local Tenant(TENANT)."
+msgstr "K2HR3クラスタのローカルテナントの一覧を表示する"
+
+#: k2hr3client.tenant.K2hr3Tenant.modify:1 of
+msgid "Update the K2HR3 cluster Local Tenant(TENANT)."
+msgstr "K2HR3 クラスタのローカルテナントを更新する"
+
+#: k2hr3client.tenant.K2hr3Tenant.validate:1 of
+msgid "Check the existence of the K2HR3 cluster Local Tenant(TENANT)."
+msgstr "テナントの存在を確認する"
+
+#: ../../k2hr3client.rst:96
+msgid "k2hr3client.token module"
+msgstr "k2hr3client.token モジュール"
+
+#: k2hr3client:1 k2hr3client.token:1 of
+msgid "K2HR3 Python Client of Token API."
+msgstr "K2HR3 Token APIのPythonクライアント"
+
+#: k2hr3client.token.K2hr3AuthType:1 of
+msgid "Represent the type of authentication."
+msgstr "認証タイプを表す"
+
+#: k2hr3client.token.K2hr3RoleToken:1 of
+msgid "Represent K2hr3 ROLE TOKEN API."
+msgstr "K2HR3 ROLE TOKEN APIを表す"
+
+#: k2hr3client.token.K2hr3RoleToken:3 k2hr3client.token.K2hr3RoleTokenList:3 of
+msgid "See https://k2hr3.antpick.ax/api_role.html for details."
+msgstr "https://k2hr3.antpick.ax/api_role.html を参照"
+
+#: k2hr3client.token.K2hr3RoleToken.expire:1 of
+msgid "Return the expire."
+msgstr "有効期限を返す"
+
+#: k2hr3client.token.K2hr3RoleToken.role:1
+#: k2hr3client.token.K2hr3RoleTokenList.role:1 of
+msgid "Return the role."
+msgstr "K2HR3ロールを返す"
+
+#: k2hr3client.token.K2hr3RoleToken.token:1
+#: k2hr3client.token.K2hr3Token.token:1 of
+msgid "Return k2hr3 token."
+msgstr "K2HR3トークンを返す"
+
+#: k2hr3client.token.K2hr3RoleTokenList:1 of
+msgid "Represent K2hr3 ROLE TOKEN LIST API."
+msgstr "K2HR3 ロールトークン一覧を表す"
+
+#: k2hr3client.token.K2hr3RoleTokenList.expand:1 of
+msgid "Return the expand."
+msgstr "expand設定を返す"
+
+#: k2hr3client.token.K2hr3RoleTokenList.registerpath:1 of
+msgid "Set the registerpath."
+msgstr "registerpathをセットする"
+
+#: k2hr3client.token.K2hr3Token:1 of
+msgid "Relationship with K2hr3 TOKEN API."
+msgstr "K2HR3 TOKEN APIとの関連性"
+
+#: k2hr3client.token.K2hr3Token:3 of
+msgid "See https://k2hr3.antpick.ax/api_token.html for details."
+msgstr "https://k2hr3.antpick.ax/api_token.html を参照する"
+
+#: k2hr3client.token.K2hr3Token.get_openstack_token:1 of
+msgid "Get the openstack token."
+msgstr "OpenStackのトークンを取得する"
+
+#: k2hr3client.token.K2hr3Token.iaas_project:1 of
+msgid "Return the k2hr3 tenant."
+msgstr "K2HR3テナントを返す"
+
+#: k2hr3client.token.K2hr3Token.iaas_token:1 of
+msgid "Return the openstack token."
+msgstr "OpenStackのトークンを返す"
+
+#: k2hr3client.token.K2hr3Token.show:1 of
+msgid "Show details of tokens."
+msgstr "K2HR3トークンの詳細を表示する"
+
+#: k2hr3client.token.K2hr3Token.validate:1 of
+msgid "Validate tokens."
+msgstr "トークンを有効性を確認する"
+
+#: ../../k2hr3client.rst:104
+msgid "k2hr3client.userdata module"
+msgstr "k2hr3client.userdataモジュール"
+
+#: k2hr3client.userdata:1 of
+msgid "K2HR3 Python Client of Userdata API."
+msgstr "K2HR3 Userdata APIのPythonクライアント"
+
+#: k2hr3client.userdata.K2hr3Userdata:1 of
+msgid "Relationship with K2HR3 USERDATA API."
+msgstr "K2HR3 USERDATA APIとの関連性"
+
+#: k2hr3client.userdata.K2hr3Userdata:3 of
+msgid "See https://k2hr3.antpick.ax/api_userdata.html for details."
+msgstr "https://k2hr3.antpick.ax/api_userdata.html を参照する"
+
+#: k2hr3client.userdata.K2hr3Userdata.provides_userdata_script:1 of
+msgid "Get userdata."
+msgstr "userdataを取得する"
+
+#: ../../k2hr3client.rst:112
+msgid "k2hr3client.version module"
+msgstr "k2hr3client.versionモジュール"
+
+#: k2hr3client.version:1 of
+msgid "K2HR3 Python Client of Version API."
+msgstr "K2HR3 Version APIのPythonクライアント"
+
+#: k2hr3client.version.K2hr3Version:1 of
+msgid "Relationship with K2HR3 VERSION API."
+msgstr "K2HR3 Version APIとの関連性"
+
+#: k2hr3client.version.K2hr3Version:3 of
+msgid "See https://k2hr3.antpick.ax/api_version.html for details."
+msgstr "https://k2hr3.antpick.ax/api_version.html を参照する"
+
+#: k2hr3client.version.K2hr3Version.get:1 of
+msgid "Get the version."
+msgstr ""
+
+#: ../../k2hr3client.rst:120
+msgid "Module contents"
+msgstr ""
+
