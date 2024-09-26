@@ -141,7 +141,7 @@ class K2hr3Tenant(K2hr3Api):  # pylint: disable=too-many-instance-attributes
     #     }
     # }
     # PUT (Update)    http(s)://API SERVER:PORT/v1/tenant/tenant name?id=tenant id # noqa
-    def modify(self, tenant_name: str, tenant_id: int,
+    def modify(self, tenant_name: str, tenant_id: int,  # pylint: disable=R0917
                users: Optional[List[str]], desc: Optional[str],
                display: Optional[str]):
         """Update the K2HR3 cluster Local Tenant(TENANT)."""

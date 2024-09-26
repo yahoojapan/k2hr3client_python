@@ -32,17 +32,25 @@ src_dir = os.path.join(here, '..')
 if os.path.exists(src_dir):
     sys.path.append(src_dir)
 
-from k2hr3client.http import K2hr3Http  # type: ignore # pylint: disable=import-error, wrong-import-position
-from k2hr3client.token import K2hr3Token  # type: ignore # pylint: disable=import-error, wrong-import-position
-from k2hr3client.token import K2hr3RoleToken   # pylint: disable=import-error, wrong-import-position
-from k2hr3client.token import K2hr3RoleTokenList   # pylint: disable=import-error, wrong-import-position
+from k2hr3client.http import K2hr3Http  # type: ignore # pylint: disable=import-error, wrong-import-position # noqa
+from k2hr3client.token import K2hr3Token  # type: ignore # pylint: disable=import-error, wrong-import-position # noqa
+from k2hr3client.token import K2hr3RoleToken   # pylint: disable=import-error, wrong-import-position # noqa
+from k2hr3client.token import K2hr3RoleTokenList   # pylint: disable=import-error, wrong-import-position # noqa
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='k2hr3 token api example')
-    parser.add_argument('--url', dest='url', default='http://localhost:18080/v1',
+    parser.add_argument('--url',
+                        dest='url',
+                        default='http://localhost:18080/v1',
                         help='k2hr3 api url')
-    parser.add_argument('--project', dest='project', default='demo', help='openstack project')
-    parser.add_argument('--token', dest='token', default='foobar', help='openstack token')
+    parser.add_argument('--project',
+                        dest='project',
+                        default='demo',
+                        help='openstack project')
+    parser.add_argument('--token',
+                        dest='token',
+                        default='foobar',
+                        help='openstack token')
     args = parser.parse_args()
 
     # 1. Gets a k2hr3 token from the openstack token
@@ -68,7 +76,7 @@ if __name__ == '__main__':
     )
     http.GET(k2hr3_role_token_list)
 
-    # 4. Gets the registerpath of the k2hr3 role token using the k2hr3 role token
+    # 4. Gets the registerpath of the k2hr3 role token
     registerpath = k2hr3_role_token_list.registerpath(roletoken)
     print("registerpath {}".format(registerpath))
     sys.exit(0)

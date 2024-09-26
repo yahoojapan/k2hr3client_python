@@ -64,6 +64,7 @@ import re
 from typing import Optional, Any
 
 
+import k2hr3client
 from k2hr3client.api import K2hr3Api, K2hr3HTTPMethod
 from k2hr3client.exception import K2hr3Exception
 
@@ -114,7 +115,7 @@ class K2hr3Resource(K2hr3Api):  # pylint: disable=too-many-instance-attributes
 
     def __init__(self, r3token: Optional[str] = None,
                  roletoken: Optional[str] = None,
-                 resource_path: Optional[str] = None) -> None:  # pylint: disable=too-many-arguments # noqa
+                 resource_path: Optional[str] = None) -> None:
         """Init the members."""
         super().__init__("resource")
         self.r3token = r3token
@@ -176,7 +177,7 @@ class K2hr3Resource(K2hr3Api):  # pylint: disable=too-many-instance-attributes
     # data=resource data
     # keys=json key value object
     #
-    def create_conf_resource(self, name: str, data_type: str, data: Any,
+    def create_conf_resource(self, name: str, data_type: str, data: Any,  # pylint: disable=R0917 # noqa
                              tenant: str, cluster_name: str,
                              keys: Optional[dict],
                              alias: Optional[list] = None):
@@ -254,7 +255,7 @@ class K2hr3Resource(K2hr3Api):  # pylint: disable=too-many-instance-attributes
         self.service = service  # type: ignore
         return self
 
-    def validate_with_notoken(self, port: str, cuk: str, role: str,
+    def validate_with_notoken(self, port: str, cuk: str, role: str,  # pylint: disable=R0917 # noqa
                               data_type: str, keys: Optional[dict],
                               service: Optional[str] = None):
         """Validate the resource without tokens."""
@@ -302,7 +303,7 @@ class K2hr3Resource(K2hr3Api):  # pylint: disable=too-many-instance-attributes
         self.keys = keys  # type: ignore
         return self
 
-    def delete_with_notoken(self, port: str, cuk: str, role: str,
+    def delete_with_notoken(self, port: str, cuk: str, role: str,  # pylint: disable=R0917 # noqa
                             data_type: str, keys: Optional[dict]):
         """Delete the resource without token."""
         self.api_id = 9
@@ -344,8 +345,10 @@ class K2hr3Resource(K2hr3Api):  # pylint: disable=too-many-instance-attributes
                     f'path must be a regular file, not {val}')
             # NOTE(hiwakaba): val must not be an arbitrary value.
             # for backward compat, the resource template is used.
-            val = "/opt/stack/k2hdkc_dbaas/utils/python-k2hr3client/examples/example_resource.txt"  # noqa # pylint: disable=line-too-long
-            with val.open() as f:  # pylint: disable=no-member
+            k2hr3client_init_py = Path(k2hr3client.__file__)
+            val = k2hr3client_init_py.parent.joinpath('examples',
+                                                      'example_resource.txt')
+            with val.open(encoding='utf-8') as f:  # pylint: disable=no-member
                 line_len = 0
                 for line in iter(f.readline, ''):
                     # 3. replace TROVE_K2HDKC_CLUSTER_NAME with clustername

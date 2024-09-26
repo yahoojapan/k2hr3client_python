@@ -1,5 +1,5 @@
 [build-system]
-requires = [ "setuptools>=61.0", "wheel" ]
+requires = [ "setuptools" ]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -36,6 +36,16 @@ Documentation = "https://k2hr3client-python.readthedocs.org"
 Repository = "https://github.com/yahoojapan/k2hr3client_python.git"
 "Bug Tracker" = "https://github.com/yahoojapan/k2hr3client_python/issues"
 Changelog = "https://github.com/yahoojapan/k2hr3client_python/blob/master/HISTORY.rst"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"*" = ["*.txt"]
+
+[tool.setuptools.packages.find]
+exclude = ["tests*"]
+where = ["src"]
 
 [tool.tox]
 legacy_tox_ini = """

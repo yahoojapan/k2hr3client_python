@@ -41,7 +41,7 @@
     myrole = K2hr3Role(mytoken.token)
     myhttp.POST(
         myrole.create(
-            role_name = "test_role",
+            name = "test_role",
             policies = ['yrn:yahoo:::demo:policy:test_policy'],
             alias = []
         )
@@ -54,6 +54,7 @@ from enum import Enum
 import json
 import logging
 from typing import List, Optional
+import warnings
 
 
 from k2hr3client.api import K2hr3Api, K2hr3HTTPMethod
@@ -121,7 +122,7 @@ class K2hr3RoleHost:  # pylint disable=too-few-public-methods
     NOTE(hiwakaba): This class exists only for backward compatibility.
     """
 
-    def __init__(self, host: str, port: str, cuk: str, extra: str, tag: str,
+    def __init__(self, host: str, port: str, cuk: str, extra: str, tag: str,  # pylint: disable=R0917 # noqa
                  inboundip: str, outboundip: str):
         """Init the members."""
         self.host = host
@@ -189,7 +190,7 @@ class K2hr3Role(K2hr3Api):  # pylint: disable=too-many-instance-attributes
         self.body = None
         self.urlparams = None
         # attributes that are unique to this class
-        self.role_name = None
+        self.name = None
         self.policies = None
         self.alias = None
         self.host = None
@@ -207,52 +208,88 @@ class K2hr3Role(K2hr3Api):  # pylint: disable=too-many-instance-attributes
 
     # POST http(s)://API SERVER:PORT/v1/role
     # PUT http(s)://API SERVER:PORT/v1/role?urlarg
-    def create(self, role_name: str, policies: List[str], alias: List[str]):
+    def create(self, name: str, policies: List[str], alias: List[str],
+               role_name: Optional[str] = None):
         """Create tokens."""
         self.api_id = 1
-        self.role_name = role_name  # type: ignore
+        self.name = name  # type: ignore
         self.policies = policies  # type: ignore
         self.alias = alias  # type: ignore
+        if name is None and role_name is not None:
+            warnings.warn(
+                "The 'role_name' parameter to 'create' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+            self.name = role_name
         return self
 
     # POST(Add HOST to ROLE)
     # http(s)://API SERVER:PORT/v1/role/role path
     # http(s)://API SERVER:PORT/v1/role/yrn full path to role
-    def add_member(self, role_name: str, host: str,
-                   clear_hostname: bool, clear_ips: str):
+    def add_member(self, name: str, host: str,  # pylint: disable=R0917
+                   clear_hostname: bool, clear_ips: str,
+                   role_name: Optional[str] = None):
         """Add a member to the role."""
         self.api_id = 3
-        self.role_name = role_name  # type: ignore
+        self.name = name  # type: ignore
         self.host = host  # type: ignore
         self.clear_hostname = clear_hostname  # type: ignore
         self.clear_ips = clear_ips  # type: ignore
+        if name is None and role_name is not None:
+            warnings.warn(
+                "The 'role_name' parameter to 'create' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+            self.name = role_name
         return self
 
-    def add_members(self, role_name: str, hosts: str,
-                    clear_hostname: bool, clear_ips: str):
+    def add_members(self, name: str, hosts: str,  # pylint: disable=R0917
+                    clear_hostname: bool, clear_ips: str,
+                    role_name: Optional[str] = None):
         """Add members to the role."""
         self.api_id = 4
-        self.role_name = role_name  # type: ignore
+        self.name = name  # type: ignore
         self.hosts = hosts  # type: ignore
         self.clear_hostname = clear_hostname  # type: ignore
         self.clear_ips = clear_ips  # type: ignore
+        if name is None and role_name is not None:
+            warnings.warn(
+                "The 'role_name' parameter to 'create' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+            self.name = role_name
         return self
 
     # PUT(Add HOST to ROLE)
     # http(s)://API SERVER:PORT/v1/role/role path?urlarg
     # http(s)://API SERVER:PORT/v1/role/yrn full path to role?urlarg
-    def add_member_with_roletoken(self, role_name: str, port: str, cuk: str,
+    def add_member_with_roletoken(self, name: str, port: str, cuk: str,  # pylint: disable=R0917 # noqa
                                   extra: str, tag: str,
-                                  inboundip: str, outboundip: str):
+                                  inboundip: str, outboundip: str,
+                                  role_name: Optional[str] = None):
         """Add members to the role without roletoken."""
         self.api_id = 5
-        self.role_name = role_name  # type: ignore
+        self.name = name  # type: ignore
         self.port = port  # type: ignore
         self.cuk = cuk  # type: ignore
         self.extra = extra  # type: ignore
         self.tag = tag  # type: ignore
         self.inboundip = inboundip  # type: ignore
         self.outboundip = outboundip  # type: ignore
+        if name is None and role_name is not None:
+            warnings.warn(
+                "The 'role_name' parameter to 'create' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+            self.name = role_name
         return self
 
     # GET(Create ROLE Token)
@@ -260,47 +297,90 @@ class K2hr3Role(K2hr3Api):  # pylint: disable=too-many-instance-attributes
 
     # GET(Show ROLE details)
     # http(s)://API SERVER:PORT/v1/role/role path or yrn full role path?urlarg
-    def get(self, role_name: str, expand: bool = True):
+    def get(self, name: str, expand: bool = True,
+            role_name: Optional[str] = None):
         """Show role details."""
         self.api_id = 6
-        self.role_name = role_name  # type: ignore
+        self.name = name  # type: ignore
         self.expand = expand  # type: ignore
+        if name is None and role_name is not None:
+            warnings.warn(
+                "The 'role_name' parameter to 'create' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+            self.name = role_name
         return self
 
     # GET (Role Token List)
     # http(s)://APISERVER:PORT/v1/role/token/list/role path or yrn full role path # noqa
-    def get_token_list(self, role_name: str, expand: bool = True):
+    def get_token_list(self, name: str, expand: bool = True,
+                       role_name: Optional[str] = None):
         """Show token list."""
         self.api_id = 7
-        self.role_name = role_name  # type: ignore
+        self.name = name  # type: ignore
         self.expand = expand  # type: ignore
+        if name is None and role_name is not None:
+            warnings.warn(
+                "The 'role_name' parameter to 'create' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+            self.name = role_name
         return self
 
     # HEAD(Validate ROLE)
     # http(s)://API SERVER:PORT/v1/role/role path or yrn full role path
-    def validate_role(self, role_name: str):
+    def validate_role(self, name: str, role_name: Optional[str] = None):
         """Validate role."""
         self.api_id = 8
-        self.role_name = role_name  # type: ignore
+        self.name = name  # type: ignore
+        if name is None and role_name is not None:
+            warnings.warn(
+                "The 'role_name' parameter to 'create' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+            self.name = role_name
         return self
 
     # DELETE(Delete ROLE)
     # http(s)://API SERVER:PORT/v1/role/role path or yrn full role path?urlarg
-    def delete(self, role_name: str):
+    def delete(self, name: str, role_name: Optional[str] = None):
         """Delete role."""
         self.api_id = 9
-        self.role_name = role_name  # type: ignore
+        self.name = name  # type: ignore
+        if name is None and role_name is not None:
+            warnings.warn(
+                "The 'role_name' parameter to 'create' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+            self.name = role_name
         return self
 
     # DELETE(Hostname/IP address deletion-role specification)
     # http(s)://API SERVER:PORT/v1/role/role path or yrn full role path
-    def delete_member(self, role_name: str, host: str, port: str, cuk: str):
+    def delete_member(self, name: str, host: str, port: str, cuk: str,  # pylint: disable=R0917 # noqa
+                      role_name: Optional[str] = None):
         """Delete host."""
         self.api_id = 10
-        self.role_name = role_name  # type: ignore
+        self.name = name  # type: ignore
         self.host = host  # type: ignore
         self.port = port  # type: ignore
         self.cuk = cuk  # type: ignore
+        if name is None and role_name is not None:
+            warnings.warn(
+                "The 'role_name' parameter to 'create' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+            self.name = role_name
         return self
 
     # DELETE(Hostname/IP address deletion - Role not specified)
@@ -312,12 +392,21 @@ class K2hr3Role(K2hr3Api):  # pylint: disable=too-many-instance-attributes
 
     # DELETE (RoleToken deletion - Role specified)
     # http(s)://API SERVER:PORT/v1/role/role path or yrn full role path
-    def delete_roletoken(self, role_name: str, port: str, cuk: str):
+    def delete_roletoken(self, name: str, port: str, cuk: str,
+                         role_name: Optional[str] = None):
         """Delete roletoken."""
         self.api_id = 12
-        self.role_name = role_name  # type: ignore
+        self.name = name  # type: ignore
         self.port = port  # type: ignore
         self.cuk = cuk  # type: ignore
+        if name is None and role_name is not None:
+            warnings.warn(
+                "The 'role_name' parameter to 'create' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+            self.name = role_name
         return self
 
     # DELETE(Delete RoleToken - Role not specified)
@@ -357,7 +446,7 @@ class K2hr3Role(K2hr3Api):  # pylint: disable=too-many-instance-attributes
         if method == K2hr3HTTPMethod.POST:
             if self.api_id == 1:
                 python_data = json.loads(_ROLE_API_CREATE_ROLE)
-                python_data['role']['name'] = self.role_name
+                python_data['role']['name'] = self.name
                 python_data['role']['policies'] = self.policies
                 python_data['role']['alias'] = self.alias
                 self.body = json.dumps(python_data)
@@ -374,13 +463,13 @@ class K2hr3Role(K2hr3Api):  # pylint: disable=too-many-instance-attributes
                 python_data['host']['outboundip'] = self.host.outboundip  # type: ignore[attr-defined]  # noqa # pylint: disable=line-too-long
                 self.body = json.dumps(python_data)
                 # http(s)://API SERVER:PORT/v1/role/role path
-                return f'{self.version}/{self.basepath}/{self.role_name}'
+                return f'{self.version}/{self.basepath}/{self.name}'
             # elif (self.api_id == 4):
             #     python_data = json.loads(_ROLE_API_ADD_MEMBERS)
             #     # TODO(hiwakaba) Not implemented
             #     self.body = json.dumps(python_data)
             #     # http(s)://API SERVER:PORT/v1/role/role path
-            #     return f'{self.basepath}/{self.role_name}'
+            #     return f'{self.basepath}/{self.name}'
             if self.api_id == 5:
                 python_data = json.loads(_ROLE_API_ADD_MEMBER_USING_ROLETOKEN)
                 python_data['host']['port'] = self.host.port  # type: ignore[attr-defined]  # noqa
@@ -391,11 +480,11 @@ class K2hr3Role(K2hr3Api):  # pylint: disable=too-many-instance-attributes
                 python_data['host']['outboundip'] = self.host.outboundip  # type: ignore[attr-defined]  # noqa # pylint: disable=line-too-long
                 self.body = json.dumps(python_data)
                 # http(s)://API SERVER:PORT/v1/role/role path
-                return f'{self.version}/{self.basepath}/{self.role_name}'
+                return f'{self.version}/{self.basepath}/{self.name}'
         if method == K2hr3HTTPMethod.PUT:
             if self.api_id == 1:
                 self.urlparams = json.dumps({
-                    'name': self.role_name,
+                    'name': self.name,
                     'policies': self.policies,
                     'alias': self.alias
                 })
@@ -412,13 +501,13 @@ class K2hr3Role(K2hr3Api):  # pylint: disable=too-many-instance-attributes
                     'outboundip': self.host.outboundip  # type: ignore[attr-defined]  # noqa
                 })
                 # http(s)://API SERVER:PORT/v1/role/role path
-                return f'{self.version}/{self.basepath}/{self.role_name}'
+                return f'{self.version}/{self.basepath}/{self.name}'
             if self.api_id == 4:
                 # TODO(hiwakaba) Not implemented
                 self.urlparams = json.dumps({
                 })
                 # http(s)://API SERVER:PORT/v1/role/role path
-                return f'{self.version}/{self.basepath}/{self.role_name}'
+                return f'{self.version}/{self.basepath}/{self.name}'
             if self.api_id == 5:
                 self.urlparams = json.dumps({
                     'port': self.port,
@@ -429,7 +518,7 @@ class K2hr3Role(K2hr3Api):  # pylint: disable=too-many-instance-attributes
                     'outboundip': self.outboundip
                 })
                 # http(s)://API SERVER:PORT/v1/role/role path
-                return f'{self.version}/{self.basepath}/{self.role_name}'
+                return f'{self.version}/{self.basepath}/{self.name}'
         if method == K2hr3HTTPMethod.GET:
             if self.api_id == 6:
                 self.urlparams = json.dumps({
@@ -437,26 +526,26 @@ class K2hr3Role(K2hr3Api):  # pylint: disable=too-many-instance-attributes
                 })
                 # GET(Show ROLE details)
                 # http(s)://API SERVER:PORT/v1/role/role path or yrn full role path?urlarg # noqa
-                return f'{self.version}/{self.basepath}/{self.role_name}'
+                return f'{self.version}/{self.basepath}/{self.name}'
             if self.api_id == 7:
                 self.urlparams = json.dumps({
                     'expand': self.expand
                 })
                 # http(s)://APISERVER:PORT/v1/role/token/list/role path or yrn full role path # noqa
                 return f'{self.version}/{self.basepath}/token/list/' \
-                       f'{self.role_name}'
+                       f'{self.name}'
 
         if method == K2hr3HTTPMethod.HEAD:
             if self.api_id == 8:
                 # HEAD(Validate ROLE)
                 # http(s)://API SERVER:PORT/v1/role/role path or yrn full role path # noqa
-                return f'{self.version}/{self.basepath}/{self.role_name}'
+                return f'{self.version}/{self.basepath}/{self.name}'
 
         if method == K2hr3HTTPMethod.DELETE:
             if self.api_id == 9:
                 # DELETE(Delete ROLE)
                 # http(s)://API SERVER:PORT/v1/role/role path or yrn full role path?urlarg # noqa
-                return f'{self.version}/{self.basepath}/{self.role_name}'
+                return f'{self.version}/{self.basepath}/{self.name}'
             if self.api_id == 10:
                 # DELETE(Hostname/IP address deletion-role specification)
                 # http(s)://API SERVER:PORT/v1/role/role path or yrn full role path # noqa
@@ -465,7 +554,7 @@ class K2hr3Role(K2hr3Api):  # pylint: disable=too-many-instance-attributes
                     'port': self.port,
                     'cuk': self.cuk
                 })
-                return f'{self.version}/{self.basepath}/{self.role_name}'
+                return f'{self.version}/{self.basepath}/{self.name}'
             if self.api_id == 11:
                 # DELETE(Hostname/IP address deletion-role specification)
                 # http(s)://API SERVER:PORT/v1/role/role path or yrn full role path # noqa
@@ -480,7 +569,7 @@ class K2hr3Role(K2hr3Api):  # pylint: disable=too-many-instance-attributes
                     'port': self.port,
                     'cuk': self.cuk
                 })
-                return f'{self.version}/{self.basepath}/{self.role_name}'
+                return f'{self.version}/{self.basepath}/{self.name}'
             if self.api_id == 13:
                 # DELETE(Delete RoleToken - Role not specified)
                 # http(s)://API SERVER:PORT/v1/role/token/role token string
