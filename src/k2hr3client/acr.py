@@ -115,7 +115,7 @@ class K2hr3Acr(K2hr3Api):  # pylint: disable=too-many-instance-attributes
         self.api_id = 2
         return self
 
-    def get_available_resources(self,
+    def get_available_resources(self,  # pylint: disable=R0917
                                 cip: Optional[str] = None,
                                 cport: Optional[str] = None,
                                 crole: Optional[str] = None,

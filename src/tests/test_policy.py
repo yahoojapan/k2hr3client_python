@@ -47,7 +47,7 @@ class TestK2hr3Policy(unittest.TestCase):
         RESOURCE_PATH = "yrn:yahoo:::demo:resource:my_resource"
         self.token = "token"
         self.service = "testservice"
-        self.policy_name = "testpolicy"
+        self.name = "testpolicy"
         self.tenant = "demo"
         self.effect = 'allow'
         self.action = ['yrn:yahoo::::action:read']
@@ -79,7 +79,7 @@ class TestK2hr3Policy(unittest.TestCase):
         }
         self.assertEqual(mypolicy.headers, headers)
         mypolicy.create(
-            self.policy_name, self.effect, self.action,
+            self.name, self.effect, self.action,
             self.resource, self.condition, self.alias)
 
         httpreq = khttp.K2hr3Http(self.base_url)
@@ -98,7 +98,7 @@ class TestK2hr3Policy(unittest.TestCase):
         # 4. assert Request body
         import json
         python_data = json.loads(kpolicy._POLICY_API_CREATE_POLICY)
-        python_data['policy']['name'] = self.policy_name
+        python_data['policy']['name'] = self.name
         python_data['policy']['effect'] = self.effect
         python_data['policy']['action'] = self.action
         python_data['policy']['resource'] = self.resource
@@ -117,7 +117,7 @@ class TestK2hr3Policy(unittest.TestCase):
         }
         self.assertEqual(mypolicy.headers, headers)
         mypolicy.create(
-            self.policy_name, self.effect, self.action,
+            self.name, self.effect, self.action,
             self.resource, self.condition, self.alias)
 
         httpreq = khttp.K2hr3Http(self.base_url)
@@ -127,7 +127,7 @@ class TestK2hr3Policy(unittest.TestCase):
         self.assertEqual(httpreq.url, f"{self.base_url}/v1/policy")
         # 2. assert URL params
         s_s_urlparams = {
-            'name': self.policy_name,
+            'name': self.name,
             'effect': self.effect,
             'action': self.action,
             'resource': self.resource,
@@ -155,13 +155,13 @@ class TestK2hr3Policy(unittest.TestCase):
             'x-auth-token': 'U=token'
         }
         self.assertEqual(mypolicy.headers, headers)
-        mypolicy.get(self.policy_name, self.service)
+        mypolicy.get(self.name, self.service)
 
         httpreq = khttp.K2hr3Http(self.base_url)
         self.assertTrue(httpreq.GET(mypolicy))
 
         # 1. assert URL
-        self.assertEqual(httpreq.url, f"{self.base_url}/v1/policy/{self.policy_name}") # noqa
+        self.assertEqual(httpreq.url, f"{self.base_url}/v1/policy/{self.name}") # noqa
         # 2. assert URL params
         s_s_urlparams = {
             'service': self.service
@@ -189,7 +189,7 @@ class TestK2hr3Policy(unittest.TestCase):
         }
         self.assertEqual(mypolicy.headers, headers)
         mypolicy.validate(
-            self.policy_name, self.tenant, self.resource, self.action,
+            self.name, self.tenant, self.resource, self.action,
             self.service
             )
 
@@ -197,7 +197,7 @@ class TestK2hr3Policy(unittest.TestCase):
         self.assertTrue(httpreq.HEAD(mypolicy))
 
         # 1. assert URL
-        self.assertEqual(httpreq.url, f"{self.base_url}/v1/policy/{self.policy_name}") # noqa
+        self.assertEqual(httpreq.url, f"{self.base_url}/v1/policy/{self.name}") # noqa
         # 2. assert URL params
         s_s_urlparams = {
             'tenant': self.tenant,
@@ -227,13 +227,13 @@ class TestK2hr3Policy(unittest.TestCase):
             'x-auth-token': 'U=token'
         }
         self.assertEqual(mypolicy.headers, headers)
-        mypolicy.delete(self.policy_name)
+        mypolicy.delete(self.name)
 
         httpreq = khttp.K2hr3Http(self.base_url)
         self.assertTrue(httpreq.DELETE(mypolicy))
 
         # 1. assert URL
-        self.assertEqual(httpreq.url, f"{self.base_url}/v1/policy/{self.policy_name}") # noqa
+        self.assertEqual(httpreq.url, f"{self.base_url}/v1/policy/{self.name}") # noqa
         # 2. assert URL params
         self.assertEqual(httpreq.urlparams, None)
         # 3. assert Request headers

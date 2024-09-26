@@ -10,7 +10,7 @@
 # Using K2HR3 as backend and incorporating it into Trove to provide
 # DBaaS functionality. K2HDKC, K2HR3, CHMPX and K2HASH are components
 # provided as AntPickax.
-# 
+#
 # For the full copyright and license information, please view
 # the license file that was distributed with this source code.
 #
@@ -80,22 +80,28 @@ IDENTITY_V3_TOKEN_AUTH_JSON_DATA = """
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='k2hr3 token api example')
-    parser.add_argument('--url', dest='url', default='http://127.0.0.1/identity/v3/auth/tokens',
-                        help='identity api url. ex) http://127.0.0.1/identity/v3/auth/tokens')
-    parser.add_argument('--user', dest='user', default='demo', help='openstack user')
+    parser.add_argument('--url', dest='url',
+                        default='http://127.0.0.1/identity/v3/auth/tokens',
+                        help='ex) http://127.0.0.1/identity/v3/auth/tokens')
+    parser.add_argument('--user', dest='user',
+                        default='demo', help='openstack user')
     parser.add_argument('--password', dest='password', default='password',
                         help='openstack user password')
-    parser.add_argument('--project', dest='project', default='demo', help='openstack project')
+    parser.add_argument('--project',
+                        dest='project',
+                        default='demo',
+                        help='openstack project')
     args = parser.parse_args()
 
     # unscoped token-id
     # https://docs.openstack.org/api-ref/identity/v3/index.html#password-authentication-with-unscoped-authorization
     url = args.url
-    python_data = json.loads(IDENTITY_V3_PASSWORD_AUTH_JSON_DATA)
-    python_data['auth']['identity']['password']['user']['name'] = args.user
-    python_data['auth']['identity']['password']['user']['password'] = args.password
-    headers = {'User-Agent': 'hiwkby-sample', 'Content-Type': 'application/json'}
-    req = urllib.request.Request(url, json.dumps(python_data).encode('ascii'),
+    pydata = json.loads(IDENTITY_V3_PASSWORD_AUTH_JSON_DATA)
+    pydata['auth']['identity']['password']['user']['name'] = args.user
+    pydata['auth']['identity']['password']['user']['password'] = args.password
+    headers = {'User-Agent': 'hiwkby-sample',
+               'Content-Type': 'application/json'}
+    req = urllib.request.Request(url, json.dumps(pydata).encode('ascii'),
                                  headers, method="POST")
     with urllib.request.urlopen(req) as res:
         unscoped_token_id = dict(res.info()).get('X-Subject-Token')
@@ -104,11 +110,12 @@ if __name__ == '__main__':
     # scoped token-id
     # https://docs.openstack.org/api-ref/identity/v3/index.html?expanded=#token-authentication-with-scoped-authorization
     my_project_name = args.project
-    python_data = json.loads(IDENTITY_V3_TOKEN_AUTH_JSON_DATA)
-    python_data['auth']['identity']['token']['id'] = unscoped_token_id
-    python_data['auth']['scope']['project']['name'] = my_project_name
-    headers = {'User-Agent': 'hiwkby-sample', 'Content-Type': 'application/json'}
-    req = urllib.request.Request(url, json.dumps(python_data).encode('ascii'),
+    pydata = json.loads(IDENTITY_V3_TOKEN_AUTH_JSON_DATA)
+    pydata['auth']['identity']['token']['id'] = unscoped_token_id
+    pydata['auth']['scope']['project']['name'] = my_project_name
+    headers = {'User-Agent': 'hiwkby-sample',
+               'Content-Type': 'application/json'}
+    req = urllib.request.Request(url, json.dumps(pydata).encode('ascii'),
                                  headers, method="POST")
     with urllib.request.urlopen(req) as res:
         scoped_token_id = dict(res.info()).get('X-Subject-Token')

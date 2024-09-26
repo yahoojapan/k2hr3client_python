@@ -155,9 +155,9 @@ class K2hr3Api(abc.ABC):  # pylint: disable=too-many-instance-attributes
 
     DEFAULT_VERSION = "v1"
 
-    def __init__(self, basepath: str, params: Optional[str] = None,
+    def __init__(self, basepath: str, params: Optional[str] = None,  # pylint: disable=R0917 # noqa
                  hdrs: Optional[dict] = None, body: Optional[str] = None,
-                 version: str = DEFAULT_VERSION) -> None: # noqa
+                 version: str = DEFAULT_VERSION) -> None:  # noqa
         """Init the K2hr3 API members.
 
         :raise K2hr3Exception: if the val is invalid.

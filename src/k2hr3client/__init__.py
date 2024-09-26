@@ -22,7 +22,7 @@
 """K2HR3 Python Client of Token API."""
 
 __author__ = 'Hirotaka Wakabayashi <hiwakaba@lycorp.co.jp>'
-__version__ = '1.0.0'
+__version__ = '1.0.2'
 
 import sys
 

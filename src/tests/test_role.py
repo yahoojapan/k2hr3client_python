@@ -45,7 +45,7 @@ class TestK2hr3Role(unittest.TestCase):
         """Sets up a test case."""
         self.base_url = "http://127.0.0.1:18080"
         self.token = "testtoken"
-        self.role_name = "testrole"
+        self.name = "testrole"
         POLICY_PATH = "yrn:yahoo:::demo:policy:my_policy"
         self.policies = [POLICY_PATH]
         self.alias = []
@@ -81,7 +81,7 @@ class TestK2hr3Role(unittest.TestCase):
             'x-auth-token': 'U=testtoken'
         }
         self.assertEqual(myrole.headers, headers)
-        myrole.create(self.role_name, self.policies, self.alias)
+        myrole.create(self.name, self.policies, self.alias)
 
         httpreq = khttp.K2hr3Http(self.base_url)
         self.assertTrue(httpreq.POST(myrole))
@@ -99,7 +99,7 @@ class TestK2hr3Role(unittest.TestCase):
         # 4. assert Request body
         import json
         python_data = json.loads(krole._ROLE_API_CREATE_ROLE)
-        python_data['role']['name'] = self.role_name
+        python_data['role']['name'] = self.name
         python_data['role']['policies'] = self.policies
         python_data['role']['alias'] = self.alias
         body = json.dumps(python_data)
@@ -115,7 +115,7 @@ class TestK2hr3Role(unittest.TestCase):
             'x-auth-token': 'U=testtoken'
         }
         self.assertEqual(myrole.headers, headers)
-        myrole.create(self.role_name, self.policies, self.alias)
+        myrole.create(self.name, self.policies, self.alias)
 
         httpreq = khttp.K2hr3Http(self.base_url)
         self.assertTrue(httpreq.PUT(myrole))
@@ -124,7 +124,7 @@ class TestK2hr3Role(unittest.TestCase):
         self.assertEqual(httpreq.url, f"{self.base_url}/v1/role")
         # 2. assert URL params
         s_s_urlparams = {
-            'name': self.role_name,
+            'name': self.name,
             'policies': self.policies,
             'alias': self.alias
         }
@@ -150,14 +150,14 @@ class TestK2hr3Role(unittest.TestCase):
             'x-auth-token': 'U=testtoken'
         }
         self.assertEqual(myrole.headers, headers)
-        myrole.add_member(self.role_name, self.host, self.clear_hostname,
+        myrole.add_member(self.name, self.host, self.clear_hostname,
                           self.clear_ips)
 
         httpreq = khttp.K2hr3Http(self.base_url)
         self.assertTrue(httpreq.POST(myrole))
 
         # 1. assert URL
-        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/{self.role_name}")
+        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/{self.name}")
         # 2. assert URL params
         self.assertEqual(myrole.urlparams, None)
         # 3. assert Request headers
@@ -189,13 +189,13 @@ class TestK2hr3Role(unittest.TestCase):
             'x-auth-token': f'U={self.token}'
         }
         self.assertEqual(myrole.headers, headers)
-        myrole.add_member(self.role_name, self.host, self.policies, self.alias)
+        myrole.add_member(self.name, self.host, self.policies, self.alias)
 
         httpreq = khttp.K2hr3Http(self.base_url)
         self.assertTrue(httpreq.PUT(myrole))
 
         # 1. assert URL
-        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/{self.role_name}")
+        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/{self.name}")
         # 2. assert URL params
         s_s_urlparams = {
             'host': self.host.host,
@@ -227,14 +227,14 @@ class TestK2hr3Role(unittest.TestCase):
         self.assertEqual(myrole.headers, headers)
 
         myrole.add_member_with_roletoken(
-            self.role_name, self.host.port, self.host.cuk, self.host.extra,
+            self.name, self.host.port, self.host.cuk, self.host.extra,
             self.host.tag, self.host.inboundip, self.host.outboundip)
 
         httpreq = khttp.K2hr3Http(self.base_url)
         self.assertTrue(httpreq.PUT(myrole))
 
         # 1. assert URL
-        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/{self.role_name}")
+        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/{self.name}")
         # 2. assert URL params
         s_s_urlparams = {
             'port': self.host.port,
@@ -263,13 +263,13 @@ class TestK2hr3Role(unittest.TestCase):
         }
         self.assertEqual(myrole.headers, headers)
 
-        myrole.get(self.role_name)
+        myrole.get(self.name)
 
         httpreq = khttp.K2hr3Http(self.base_url)
         self.assertTrue(httpreq.GET(myrole))
 
         # 1. assert URL
-        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/{self.role_name}")
+        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/{self.name}")
         # 2. assert URL params
         s_s_urlparams = {
             'expand': True
@@ -293,13 +293,13 @@ class TestK2hr3Role(unittest.TestCase):
         }
         self.assertEqual(myrole.headers, headers)
 
-        myrole.get_token_list(self.role_name)
+        myrole.get_token_list(self.name)
 
         httpreq = khttp.K2hr3Http(self.base_url)
         self.assertTrue(httpreq.GET(myrole))
 
         # 1. assert URL
-        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/token/list/{self.role_name}") # noqa
+        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/token/list/{self.name}") # noqa
         # 2. assert URL params
         s_s_urlparams = {
             'expand': True
@@ -323,13 +323,13 @@ class TestK2hr3Role(unittest.TestCase):
         }
         self.assertEqual(myrole.headers, headers)
 
-        myrole.validate_role(self.role_name)
+        myrole.validate_role(self.name)
 
         httpreq = khttp.K2hr3Http(self.base_url)
         self.assertTrue(httpreq.HEAD(myrole))
 
         # 1. assert URL
-        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/{self.role_name}")
+        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/{self.name}")
         # 2. assert URL params
         self.assertEqual(httpreq.urlparams, None)
         # 3. assert Request headers
@@ -348,13 +348,13 @@ class TestK2hr3Role(unittest.TestCase):
         }
         self.assertEqual(myrole.headers, headers)
 
-        myrole.delete(self.role_name)
+        myrole.delete(self.name)
 
         httpreq = khttp.K2hr3Http(self.base_url)
         self.assertTrue(httpreq.DELETE(myrole))
 
         # 1. assert URL
-        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/{self.role_name}")
+        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/{self.name}")
         # 2. assert URL params
         self.assertEqual(httpreq.urlparams, None)
         # 3. assert Request headers
@@ -372,14 +372,14 @@ class TestK2hr3Role(unittest.TestCase):
             'x-auth-token': f'U={self.token}'
         }
         self.assertEqual(myrole.headers, headers)
-        myrole.delete_member(self.role_name, self.host.host, self.host.port,
+        myrole.delete_member(self.name, self.host.host, self.host.port,
                              self.host.cuk)
 
         httpreq = khttp.K2hr3Http(self.base_url)
         self.assertTrue(httpreq.DELETE(myrole))
 
         # 1. assert URL
-        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/{self.role_name}")
+        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/{self.name}")
         # 2. assert URL params
         s_s_urlparams = {
             'host': self.host.host,
@@ -434,13 +434,13 @@ class TestK2hr3Role(unittest.TestCase):
         }
         self.assertEqual(myrole.headers, headers)
 
-        myrole.delete_roletoken(self.role_name, self.host.port, self.host.cuk)
+        myrole.delete_roletoken(self.name, self.host.port, self.host.cuk)
 
         httpreq = khttp.K2hr3Http(self.base_url)
         self.assertTrue(httpreq.DELETE(myrole))
 
         # 1. assert URL
-        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/{self.role_name}")
+        self.assertEqual(httpreq.url, f"{self.base_url}/v1/role/{self.name}")
         # 2. assert URL params
         s_s_urlparams = {
             'port': self.host.port,

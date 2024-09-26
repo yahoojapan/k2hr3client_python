@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: k2hr3client \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-01 13:58+0900\n"
+"POT-Creation-Date: 2024-09-26 10:42+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -217,7 +217,8 @@ msgid "K2hr3Http sends a http/https request to the K2hr3 WebAPI."
 msgstr "K2HR3 WebAPIにHTTP/HTTPSリクエストを送信する"
 
 #: k2hr3client.http.K2hr3Http:3 of
-msgid "Most oif the members are set by setter methods only one time."
+#, fuzzy
+msgid "Most of the members are set by setter methods only one time."
 msgstr "ほとんどのメンバーは一度だけセットされます"
 
 #: k2hr3client.http.K2hr3Http.DELETE:1 of
@@ -653,4 +654,23 @@ msgstr ""
 #: ../../k2hr3client.rst:120
 msgid "Module contents"
 msgstr ""
+
+#: k2hr3client.get_version:1 of
+#, fuzzy
+msgid "Return a version of the package."
+msgstr "APIバージョン文字列を返す"
+
+#: ../../k2hr3client.rst
+#, fuzzy
+msgid "Returns"
+msgstr "データを返す"
+
+#: k2hr3client.get_version:3 of
+msgid "version"
+msgstr "バージョン"
+
+#: ../../k2hr3client.rst
+#, fuzzy
+msgid "Return type"
+msgstr "データを返す"
 

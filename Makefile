@@ -138,13 +138,12 @@ dist: clean version ## builds source and wheel package
 	@echo 'source  ' ${SOURCE_VERSION}
 	@echo 'history ' ${HISTORY_VERSION}
 	@if test "${SOURCE_VERSION}" = "${HISTORY_VERSION}" ; then \
-		python3 setup.py sdist ; \
-		python3 setup.py bdist_wheel ; \
+		python3 -m build ; \
 		ls -l dist ; \
 	fi
 
 install: clean ## install the package to the active Python's site-packages
-	python3 setup.py install
+	python3 -m pip install .
 
 #
 # Local variables:

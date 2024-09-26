@@ -42,7 +42,7 @@
     RESOURCE_PATH = "yrn:yahoo:::demo:resource:test_resource"
     myhttp.POST(
         mypolicy.create(
-            policy_name="test_policy",
+            name="test_policy",
             effect="allow",
             action=['yrn:yahoo::::action:read'],
             resource=[RESOURCE_PATH],
@@ -57,6 +57,7 @@
 import json
 import logging
 from typing import List, Optional
+import warnings
 
 
 from k2hr3client.api import K2hr3Api, K2hr3HTTPMethod
@@ -103,7 +104,7 @@ class K2hr3Policy(K2hr3Api):  # pylint: disable=too-many-instance-attributes
         self.body = None
         self.urlparams = None
         # attributes that are unique to this class
-        self.policy_name = None
+        self.name = None
         self.effect = None
         self.action = None
         self.resource = None
@@ -115,53 +116,87 @@ class K2hr3Policy(K2hr3Api):  # pylint: disable=too-many-instance-attributes
     # ---- POST/PUT ----
     # POST   http(s)://API SERVER:PORT/v1/policy
     # PUT    http(s)://API SERVER:PORT/v1/policy?urlarg
-    def create(self, policy_name: str, effect: str,
+    def create(self, name: str, effect: str,  # pylint: disable=R0917
                action: Optional[List[str]],
                resource: Optional[List[str]] = None,
                condition: Optional[str] = None,
-               alias: Optional[List[str]] = None):
+               alias: Optional[List[str]] = None,
+               policy_name: Optional[str] = None):
         """Create policies."""
         self.api_id = 1
         # must to process a request further
-        self.policy_name = policy_name  # type: ignore
+        self.name = name  # type: ignore
         self.effect = effect  # type: ignore
         self.action = action  # type: ignore
         # optionals
         self.resource = resource  # type: ignore
         self.condition = condition  # type: ignore
         self.alias = alias  # type: ignore
+        if name is None and policy_name is not None:
+            warnings.warn(
+                "The 'policy_name' parameter to 'create' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+            self.name = policy_name
         return self
 
     # ---- GET ----
     # GET    http(s)://API SERVER:PORT/v1/policy/\
     #            policy path or yrn full policy path{?service=service name} # noqa
-    def get(self, policy_name: str, service: str):
+    def get(self, name: str, service: str, policy_name: Optional[str] = None):
         """Get policies."""
         self.api_id = 3
-        self.policy_name = policy_name   # type: ignore
+        self.name = name   # type: ignore
         self.service = service  # type: ignore
+        if name is None and policy_name is not None:
+            warnings.warn(
+                "The 'policy_name' parameter to 'create' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+            self.name = policy_name
         return self
 
     # ---- HEAD ----
     # HEAD   http(s)://API SERVER:PORT/v1/policy/yrn full policy path?urlarg
-    def validate(self, policy_name: str, tenant: str, resource: str,
-                 action: str, service: Optional[str] = None):
+    def validate(self, name: str, tenant: str, resource: str,  # pylint: disable=R0917 # noqa
+                 action: str, service: Optional[str] = None,
+                 policy_name: Optional[str] = None):
         """Validate policies."""
         self.api_id = 4
-        self.policy_name = policy_name  # type: ignore
+        self.name = name  # type: ignore
         self.tenant = tenant  # type: ignore
         self.resource = resource  # type: ignore
         self.action = action  # type: ignore
         # optionals
         self.service = service  # type: ignore
+        if name is None and policy_name is not None:
+            warnings.warn(
+                "The 'policy_name' parameter to 'create' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+            self.name = policy_name
         return self
 
     # ---- DELETE ----
     # DELETE http(s)://API SERVER:PORT/v1/policy/policy path or yrn full policy path # noqa
-    def delete(self, policy_name: str):
+    def delete(self, name: str, policy_name: Optional[str] = None):
         """Delete policies."""
         self.api_id = 5
-        self.policy_name = policy_name  # type: ignore
+        self.name = name  # type: ignore
+        if name is None and policy_name is not None:
+            warnings.warn(
+                "The 'policy_name' parameter to 'create' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+            self.name = policy_name
         return self
 
     def __repr__(self) -> str:
@@ -196,7 +231,7 @@ class K2hr3Policy(K2hr3Api):  # pylint: disable=too-many-instance-attributes
         if method == K2hr3HTTPMethod.POST:
             if self.api_id == 1:
                 python_data = json.loads(_POLICY_API_CREATE_POLICY)
-                python_data['policy']['name'] = self.policy_name
+                python_data['policy']['name'] = self.name
                 python_data['policy']['effect'] = self.effect
                 python_data['policy']['action'] = self.action
                 python_data['policy']['resource'] = self.resource
@@ -206,7 +241,7 @@ class K2hr3Policy(K2hr3Api):  # pylint: disable=too-many-instance-attributes
         if method == K2hr3HTTPMethod.PUT:
             if self.api_id == 1:
                 self.urlparams = json.dumps({
-                    'name': self.policy_name,
+                    'name': self.name,
                     'effect': self.effect,
                     'action': self.action,
                     'resource': self.resource,
@@ -218,7 +253,7 @@ class K2hr3Policy(K2hr3Api):  # pylint: disable=too-many-instance-attributes
                 self.urlparams = json.dumps({
                     'service': self.service
                 })
-                return f'{self.version}/{self.basepath}/{self.policy_name}'
+                return f'{self.version}/{self.basepath}/{self.name}'
         if method == K2hr3HTTPMethod.HEAD:
             if self.api_id == 4:
                 self.urlparams = json.dumps({
@@ -227,10 +262,10 @@ class K2hr3Policy(K2hr3Api):  # pylint: disable=too-many-instance-attributes
                     'action': self.action,
                     'service': self.service
                 })
-                return f'{self.version}/{self.basepath}/{self.policy_name}'
+                return f'{self.version}/{self.basepath}/{self.name}'
         if method == K2hr3HTTPMethod.DELETE:
             if self.api_id == 5:
-                return f'{self.version}/{self.basepath}/{self.policy_name}'
+                return f'{self.version}/{self.basepath}/{self.name}'
         return None
 
 #
