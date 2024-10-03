@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: k2hr3client \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 10:42+0900\n"
+"POT-Creation-Date: 2024-10-03 18:04+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -26,34 +26,46 @@ msgid "History"
 msgstr "歴史"
 
 #: ../../../HISTORY.rst:6
-msgid "1.0.2 (2024-09-26)"
+msgid "1.0.3 (2024-10-03)"
 msgstr ""
 
 #: ../../../HISTORY.rst:8
+msgid "Fixes the K2hr3 API version"
+msgstr "K2hr3 APIのバージョンを固定化"
+
+#: ../../../HISTORY.rst:9
+msgid "Deprecates K2hr3Resource.create_conf_resource params"
+msgstr "K2hr3Resource.create_conf_resourceのパラメータを一部非推奨化"
+
+#: ../../../HISTORY.rst:12
+msgid "1.0.2 (2024-09-26)"
+msgstr ""
+
+#: ../../../HISTORY.rst:14
 msgid "Fixes lint errors"
 msgstr "静的解析ツールのエラーを修正"
 
-#: ../../../HISTORY.rst:11
+#: ../../../HISTORY.rst:17
 msgid "1.0.1 (2024-09-25)"
 msgstr ""
 
-#: ../../../HISTORY.rst:13
+#: ../../../HISTORY.rst:19
 msgid "Fixes resource API bugs"
 msgstr "Resource APIの不具合を修正"
 
-#: ../../../HISTORY.rst:16
+#: ../../../HISTORY.rst:22
 msgid "1.0.0 (2024-08-28)"
 msgstr ""
 
-#: ../../../HISTORY.rst:18
+#: ../../../HISTORY.rst:24
 msgid "Supports the other APIs"
 msgstr "他のAPIをサポート"
 
-#: ../../../HISTORY.rst:21
+#: ../../../HISTORY.rst:27
 msgid "0.0.1 (2020-08-28)"
 msgstr ""
 
-#: ../../../HISTORY.rst:23
+#: ../../../HISTORY.rst:29
 msgid "Supports Token, Resource, Policy and Role API"
 msgstr "トークン、リソース、ポリシーおよびロールAPIをサポート"
 
