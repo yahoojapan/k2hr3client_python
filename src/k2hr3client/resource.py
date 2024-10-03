@@ -62,7 +62,7 @@ import logging
 from pathlib import Path
 import re
 from typing import Optional, Any
-
+import warnings
 
 import k2hr3client
 from k2hr3client.api import K2hr3Api, K2hr3HTTPMethod
@@ -141,6 +141,7 @@ class K2hr3Resource(K2hr3Api):  # pylint: disable=too-many-instance-attributes
         self.urlparams = None
         # attributes that are unique to this class
         self.name = None
+        self.resource_data = None
         self.data_type = None
         self.keys = None
         self.alias = None
@@ -177,15 +178,40 @@ class K2hr3Resource(K2hr3Api):  # pylint: disable=too-many-instance-attributes
     # data=resource data
     # keys=json key value object
     #
-    def create_conf_resource(self, name: str, data_type: str, data: Any,  # pylint: disable=R0917 # noqa
-                             tenant: str, cluster_name: str,
-                             keys: Optional[dict],
+    def create_conf_resource(self, name: str, data_type: str, resource_data: str,  # pylint: disable=R0917 # noqa
+                             data: Optional[Any] = None,
+                             tenant: Optional[str] = None,
+                             cluster_name: Optional[str] = None,
+                             keys: Optional[dict] = None,
                              alias: Optional[list] = None):
         """Create the resource."""
         self.api_id = 1
         self.name = name  # type: ignore
+        self.resource_data = resource_data  # type: ignore
         self.data_type = data_type  # type: ignore
-        self._set_data(data, tenant, cluster_name)  # type: ignore
+        if resource_data is None and data is not None:
+            warnings.warn(
+                "The 'datae' parameter to 'create_conf_resource' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+            self.resource_data = data
+        if tenant is not None:
+            warnings.warn(
+                "The 'tenant' parameter to 'create_conf_resource' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+        if cluster_name is not None:
+            warnings.warn(
+                "The 'cluster_name' parameter to 'create_conf_resource' "
+                "is deprecated and slated for removal in "
+                "k2hr3client-1.1.0",
+                DeprecationWarning,
+                stacklevel=1)
+        self._set_data(resource_data, tenant, cluster_name)  # type: ignore
         self.keys = keys  # type: ignore
         self.alias = alias  # type: ignore
         return self

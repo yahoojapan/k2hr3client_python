@@ -26,8 +26,9 @@ from __future__ import (absolute_import, division, print_function,
 import argparse
 import json
 import os
-import sys
 from pathlib import Path
+import re
+import sys
 import urllib.parse
 import urllib.request
 
@@ -37,11 +38,14 @@ if os.path.exists(src_dir):
     sys.path.append(src_dir)
 
 import k2hr3client # type: ignore # pylint: disable=import-error, wrong-import-position # noqa
+from k2hr3client.exception import K2hr3Exception # type: ignore # pylint: disable=import-error, wrong-import-position # noqa
 from k2hr3client.http import K2hr3Http  # type: ignore # pylint: disable=import-error, wrong-import-position # noqa
 from k2hr3client.token import K2hr3Token  # type: ignore # pylint: disable=import-error, wrong-import-position # noqa
 from k2hr3client.resource import K2hr3Resource  # type: ignore # pylint: disable=import-error, wrong-import-position # noqa
 from k2hr3client.policy import K2hr3Policy  # type: ignore # pylint: disable=import-error, wrong-import-position # noqa
 from k2hr3client.role import K2hr3Role  # type: ignore # pylint: disable=import-error, wrong-import-position # noqa
+
+_MAX_LINE_LENGTH = 1024 * 8
 
 IDENTITY_V3_PASSWORD_AUTH_JSON_DATA = """
 {
@@ -125,6 +129,31 @@ def get_scoped_token_id(url, user, password, project):
         return scoped_token_id
 
 
+def set_data(val: Path, projectname: str, clustername: str) -> str:
+    """Set data."""
+    if val.exists() is False:
+        raise K2hr3Exception(f'path must exist, not {val}')
+    if val.is_file() is False:
+        raise K2hr3Exception(
+            f'path must be a regular file, not {val}')
+    data = ""
+    with val.open(encoding='utf-8') as f:  # pylint: disable=no-member
+        line_len = 0
+        for line in iter(f.readline, ''):
+            # 3. replace TROVE_K2HDKC_CLUSTER_NAME with clustername
+            line = re.sub('__TROVE_K2HDKC_CLUSTER_NAME__', clustername,
+                          line)
+            # 4. replace TROVE_K2HDKC_TENANT_NAME with projectname
+            line = re.sub('__TROVE_K2HDKC_TENANT_NAME__', projectname,
+                          line)
+            line_len += len(line)
+            if line_len > _MAX_LINE_LENGTH:
+                raise K2hr3Exception('data too big')
+            data = "".join([data, line])  # type: ignore
+
+    return data
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='k2hr3 token api example')
     parser.add_argument(
@@ -174,16 +203,16 @@ if __name__ == '__main__':
 
     # 3. Makes a new k2hr3 resource
     k2hr3_resource = K2hr3Resource(k2hr3_token.token)
-    init_py = Path(k2hr3client.__file__)
-    txt_file = init_py.parent.joinpath('examples',
-                                       'example_resource.txt')
+    k2hr3client_init_py = Path(k2hr3client.__file__)
+    val = k2hr3client_init_py.parent.joinpath('examples',
+                                              'example_resource.txt')
+    data = set_data(val, projectname=args.project, clustername=args.resource)
+
     http.POST(
         k2hr3_resource.create_conf_resource(
             name=args.resource,
             data_type='string',
-            data=Path(txt_file),
-            tenant=args.project,
-            cluster_name=args.resource,
+            resource_data=data,
             keys={
                 "cluster-name": args.resource,
                 "chmpx-server-port": "8020",
@@ -202,11 +231,9 @@ if __name__ == '__main__':
     k2hr3_resource_server = K2hr3Resource(k2hr3_token.token)
     http.POST(
         k2hr3_resource_server.create_conf_resource(
-            tenant=args.project,
-            cluster_name=args.resource,
             name="/".join([args.resource, "server"]),
             data_type='string',
-            data="",
+            resource_data="",
             keys={"chmpx-mode": "SERVER",
                   "k2hr3-init-packages": "",
                   "k2hr3-init-packagecloud-packages": "",
@@ -219,11 +246,9 @@ if __name__ == '__main__':
     k2hr3_resource_slave = K2hr3Resource(k2hr3_token.token)
     http.POST(
         k2hr3_resource_slave.create_conf_resource(
-            tenant=args.project,
-            cluster_name=args.resource,
             name="/".join([args.resource, "slave"]),
             data_type='string',
-            data="",
+            resource_data="",
             keys={"chmpx-mode": "SLAVE",
                   "k2hr3-init-packages": "",
                   "k2hr3-init-packagecloud-packages": "",
