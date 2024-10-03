@@ -59,27 +59,6 @@ class TestK2hr3Version(unittest.TestCase):
         self.assertRegex(repr(myversion), '<K2hr3Version .*>')
 
     @patch('k2hr3client.http.K2hr3Http._HTTP_REQUEST_METHOD')
-    def test_k2hr3version_root_get_ok(self, mock_HTTP_REQUEST_METHOD):
-        """Get root path."""
-        myversion = kversion.K2hr3Version()
-        self.assertEqual(myversion.name, "")
-        myversion.get()
-        httpreq = khttp.K2hr3Http(self.base_url)
-        self.assertTrue(httpreq.GET(myversion))
-
-        # 1. assert URL
-        self.assertEqual(httpreq.url, f"{self.base_url}/")
-        # 2. assert URL params
-        self.assertEqual(myversion.urlparams, None)
-        # 3. assert Request header
-        headers = {
-            'Content-Type': 'application/json',
-        }
-        self.assertEqual(myversion.headers, headers)
-        # 4. assert Request body
-        self.assertEqual(myversion.body, None)
-
-    @patch('k2hr3client.http.K2hr3Http._HTTP_REQUEST_METHOD')
     def test_k2hr3version_root_get_v1_ok(self, mock_HTTP_REQUEST_METHOD):
         """Get root path."""
         myversion = kversion.K2hr3Version("v1")

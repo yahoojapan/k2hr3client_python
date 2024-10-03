@@ -47,7 +47,7 @@ class TestK2hr3Resource(unittest.TestCase):
         self.name = "test_resource"
         # self.project = "test_project"
         self.data_type = 'string'
-        self.data = "testresourcedata"
+        self.resource_data = "testresourcedata"
         self.tenant = "mytenant"
         self.cluster_name = "mycluster"
         self.keys = {
@@ -94,13 +94,13 @@ class TestK2hr3Resource(unittest.TestCase):
         self.assertEqual(myresource.r3token, "token")
         """ root path."""
         myresource.create_conf_resource(
-            self.name,
-            self.data_type,
-            self.data,
-            self.tenant,
-            self.cluster_name,
-            self.keys,
-            self.alias)
+            name = self.name,
+            data_type = self.data_type,
+            resource_data = self.resource_data,
+            tenant = self.tenant,
+            cluster_name = self.cluster_name,
+            keys = self.keys,
+            alias = self.alias)
         httpreq = khttp.K2hr3Http(self.base_url)
         self.assertTrue(httpreq.PUT(myresource))
 
@@ -110,7 +110,7 @@ class TestK2hr3Resource(unittest.TestCase):
         s_s_urlparams = {
             'name': self.name,
             'type': self.data_type,
-            'data': self.data,
+            'data': self.resource_data,
             'keys': self.keys,
             'alias': self.alias
         }
