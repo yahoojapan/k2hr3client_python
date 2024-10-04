@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 #
-# K2HDKC DBaaS based on Trove
+# k2hr3client - Python client for K2HR3 REST API
 #
 # Copyright 2020 Yahoo Japan Corporation
 # Copyright 2024 LY Corporation
 #
-# K2HDKC DBaaS is a Database as a Service compatible with Trove which
-# is DBaaS for OpenStack.
-# Using K2HR3 as backend and incorporating it into Trove to provide
-# DBaaS functionality. K2HDKC, K2HR3, CHMPX and K2HASH are components
-# provided as AntPickax.
+# K2HR3 is K2hdkc based Resource and Roles and policy Rules, gathers
+# common management information for the cloud.
+# K2HR3 can dynamically manage information as "who", "what", "operate".
+# These are stored as roles, resources, policies in K2hdkc, and the
+# client system can dynamically read and modify these information.
 #
 # For the full copyright and license information, please view
 # the license file that was distributed with this source code.
@@ -37,15 +37,13 @@
     myhttp.POST(mytoken.create())
     mytoken.token  // gAAAAA...
 
-    # POST a request to create a resource from K2HR3 Resource API.
+    # POST a request to create a K2HDKC resource.
     myresource = K2hr3Resource(mytoken.token)
     myhttp.POST(
         myresource.create_conf_resource(
             name="test_resource",
             data_type="string",
-            data="testresourcedata",
-            tenant="demo",
-            cluster_name="testcluster",
+            resource_data="testresourcedata",
             keys={
                 "cluster-name": "test-cluster",
                 "chmpx-server-port": "8020",
@@ -59,14 +57,9 @@
 
 import json
 import logging
-from pathlib import Path
-import re
-from typing import Optional, Any
-import warnings
+from typing import Optional
 
-import k2hr3client
 from k2hr3client.api import K2hr3Api, K2hr3HTTPMethod
-from k2hr3client.exception import K2hr3Exception
 
 LOG = logging.getLogger(__name__)
 
@@ -140,8 +133,8 @@ class K2hr3Resource(K2hr3Api):  # pylint: disable=too-many-instance-attributes
         self.body = None
         self.urlparams = None
         # attributes that are unique to this class
-        self.name = None
         self.resource_data = None
+        self.name = None
         self.data_type = None
         self.keys = None
         self.alias = None
@@ -150,7 +143,6 @@ class K2hr3Resource(K2hr3Api):  # pylint: disable=too-many-instance-attributes
         self.port = None
         self.cuk = None
         self.role = None
-        self._data = None
 
     # ---- POST/PUT ----
     # POST http(s)://API SERVER:PORT/v1/resource
@@ -179,9 +171,6 @@ class K2hr3Resource(K2hr3Api):  # pylint: disable=too-many-instance-attributes
     # keys=json key value object
     #
     def create_conf_resource(self, name: str, data_type: str, resource_data: str,  # pylint: disable=R0917 # noqa
-                             data: Optional[Any] = None,
-                             tenant: Optional[str] = None,
-                             cluster_name: Optional[str] = None,
                              keys: Optional[dict] = None,
                              alias: Optional[list] = None):
         """Create the resource."""
@@ -189,29 +178,6 @@ class K2hr3Resource(K2hr3Api):  # pylint: disable=too-many-instance-attributes
         self.name = name  # type: ignore
         self.resource_data = resource_data  # type: ignore
         self.data_type = data_type  # type: ignore
-        if resource_data is None and data is not None:
-            warnings.warn(
-                "The 'datae' parameter to 'create_conf_resource' "
-                "is deprecated and slated for removal in "
-                "k2hr3client-1.1.0",
-                DeprecationWarning,
-                stacklevel=1)
-            self.resource_data = data
-        if tenant is not None:
-            warnings.warn(
-                "The 'tenant' parameter to 'create_conf_resource' "
-                "is deprecated and slated for removal in "
-                "k2hr3client-1.1.0",
-                DeprecationWarning,
-                stacklevel=1)
-        if cluster_name is not None:
-            warnings.warn(
-                "The 'cluster_name' parameter to 'create_conf_resource' "
-                "is deprecated and slated for removal in "
-                "k2hr3client-1.1.0",
-                DeprecationWarning,
-                stacklevel=1)
-        self._set_data(resource_data, tenant, cluster_name)  # type: ignore
         self.keys = keys  # type: ignore
         self.alias = alias  # type: ignore
         return self
@@ -352,43 +318,6 @@ class K2hr3Resource(K2hr3Api):  # pylint: disable=too-many-instance-attributes
         return '<K2hr3Resource ' + values + '>'
 
     @property  # type: ignore
-    def data(self) -> str:
-        """Return data."""
-        return self._data  # type: ignore
-
-    def _set_data(self, val: Any, projectname: str, clustername: str) -> None:
-        """Set data."""
-        if getattr(self, '_data', None) is None:
-            self._data = val
-        if isinstance(val, Path) is False:
-            self._data = val
-        else:
-            self._data = ""  # type: ignore
-            if val.exists() is False:
-                raise K2hr3Exception(f'path must exist, not {val}')
-            if val.is_file() is False:
-                raise K2hr3Exception(
-                    f'path must be a regular file, not {val}')
-            # NOTE(hiwakaba): val must not be an arbitrary value.
-            # for backward compat, the resource template is used.
-            k2hr3client_init_py = Path(k2hr3client.__file__)
-            val = k2hr3client_init_py.parent.joinpath('examples',
-                                                      'example_resource.txt')
-            with val.open(encoding='utf-8') as f:  # pylint: disable=no-member
-                line_len = 0
-                for line in iter(f.readline, ''):
-                    # 3. replace TROVE_K2HDKC_CLUSTER_NAME with clustername
-                    line = re.sub('__TROVE_K2HDKC_CLUSTER_NAME__', clustername,
-                                  line)
-                    # 4. replace TROVE_K2HDKC_TENANT_NAME with projectname
-                    line = re.sub('__TROVE_K2HDKC_TENANT_NAME__', projectname,
-                                  line)
-                    line_len += len(line)
-                    if line_len > _MAX_LINE_LENGTH:
-                        raise K2hr3Exception('data too big')
-                    self._data = "".join([self._data, line])  # type: ignore
-
-    @property  # type: ignore
     def r3token(self):
         """Return the r3token."""
         return self._r3token
@@ -431,7 +360,7 @@ class K2hr3Resource(K2hr3Api):  # pylint: disable=too-many-instance-attributes
                 python_data = json.loads(_RESOURCE_API_CREATE_RESOURCE)
                 python_data['resource']['name'] = self.name
                 python_data['resource']['type'] = self.data_type
-                python_data['resource']['data'] = self.data
+                python_data['resource']['data'] = self.resource_data
                 python_data['resource']['keys'] = self.keys
                 python_data['resource']['alias'] = self.alias
                 self.body = json.dumps(python_data)
@@ -443,7 +372,7 @@ class K2hr3Resource(K2hr3Api):  # pylint: disable=too-many-instance-attributes
                 self.urlparams = json.dumps({
                     'name': self.name,
                     'type': self.data_type,
-                    'data': self.data,
+                    'data': self.resource_data,
                     'keys': self.keys,
                     'alias': self.alias
                 })

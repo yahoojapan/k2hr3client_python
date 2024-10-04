@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
 #
-# K2HDKC DBaaS based on Trove
+# k2hr3client - Python client for K2HR3 REST API
 #
-# Copyright (c) 2020 Yahoo Japan Corporation
+# Copyright 2020 Yahoo Japan Corporation
 # Copyright 2024 LY Corporation
+#
+# K2HR3 is K2hdkc based Resource and Roles and policy Rules, gathers 
+# common management information for the cloud.
+# K2HR3 can dynamically manage information as "who", "what", "operate".
+# These are stored as roles, resources, policies in K2hdkc, and the
+# client system can dynamically read and modify these information.
 #
 # For the full copyright and license information, please view
 # the license file that was distributed with this source code.
@@ -29,11 +35,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    environment:
-      name: pypi
-      url: https://pypi.org/p/k2hr3client
-    permissions:
-      id-token: write
     strategy:
       fail-fast: false
       matrix:
@@ -74,7 +75,9 @@ jobs:
       run: python -m build
     - name: Publish distribution to PyPI
       if: ${{  matrix.python-version == '3.11' && startsWith(github.ref, 'refs/tags') }}
-      uses: pypa/gh-action-pypi-publish@release/v1
+      uses: pypa/gh-action-pypi-publish@master
+      with:
+        password: ${{ secrets.PYPI_API_TOKEN }}
 
 #
 # Local variables:
