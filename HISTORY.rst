@@ -2,6 +2,13 @@
 History
 =======
 
+1.1.0 (2024-10-04)
+-------------------
+
+* Removes the deprecated Interfaces
+* Removes the examples
+* Updates the docs
+
 1.0.3 (2024-10-03)
 -------------------
 

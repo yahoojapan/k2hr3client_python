@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 #
-# K2HDKC DBaaS based on Trove
+# k2hr3client - Python client for K2HR3 REST API
 #
 # Copyright 2020 Yahoo Japan Corporation
 # Copyright 2024 LY Corporation
 #
-# K2HDKC DBaaS is a Database as a Service compatible with Trove which
-# is DBaaS for OpenStack.
-# Using K2HR3 as backend and incorporating it into Trove to provide
-# DBaaS functionality. K2HDKC, K2HR3, CHMPX and K2HASH are components
-# provided as AntPickax.
+# K2HR3 is K2hdkc based Resource and Roles and policy Rules, gathers 
+# common management information for the cloud.
+# K2HR3 can dynamically manage information as "who", "what", "operate".
+# These are stored as roles, resources, policies in K2hdkc, and the
+# client system can dynamically read and modify these information.
 #
 # For the full copyright and license information, please view
 # the license file that was distributed with this source code.
@@ -57,6 +57,27 @@ class TestK2hr3Version(unittest.TestCase):
         myversion = kversion.K2hr3Version()
         # Note: The order of _error and _code is unknown!
         self.assertRegex(repr(myversion), '<K2hr3Version .*>')
+
+    @patch('k2hr3client.http.K2hr3Http._HTTP_REQUEST_METHOD')
+    def test_k2hr3version_root_get_ok(self, mock_HTTP_REQUEST_METHOD):
+        """Get root path."""
+        myversion = kversion.K2hr3Version()
+        self.assertEqual(myversion.name, "")
+        myversion.get()
+        httpreq = khttp.K2hr3Http(self.base_url)
+        self.assertTrue(httpreq.GET(myversion))
+
+        # 1. assert URL
+        self.assertEqual(httpreq.url, f"{self.base_url}/")
+        # 2. assert URL params
+        self.assertEqual(myversion.urlparams, None)
+        # 3. assert Request header
+        headers = {
+            'Content-Type': 'application/json',
+        }
+        self.assertEqual(myversion.headers, headers)
+        # 4. assert Request body
+        self.assertEqual(myversion.body, None)
 
     @patch('k2hr3client.http.K2hr3Http._HTTP_REQUEST_METHOD')
     def test_k2hr3version_root_get_v1_ok(self, mock_HTTP_REQUEST_METHOD):
