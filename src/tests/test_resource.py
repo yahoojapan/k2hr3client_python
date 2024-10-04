@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 #
-# K2HDKC DBaaS based on Trove
+# k2hr3client - Python client for K2HR3 REST API
 #
 # Copyright 2020 Yahoo Japan Corporation
 # Copyright 2024 LY Corporation
 #
-# K2HDKC DBaaS is a Database as a Service compatible with Trove which
-# is DBaaS for OpenStack.
-# Using K2HR3 as backend and incorporating it into Trove to provide
-# DBaaS functionality. K2HDKC, K2HR3, CHMPX and K2HASH are components
-# provided as AntPickax.
+# K2HR3 is K2hdkc based Resource and Roles and policy Rules, gathers 
+# common management information for the cloud.
+# K2HR3 can dynamically manage information as "who", "what", "operate".
+# These are stored as roles, resources, policies in K2hdkc, and the
+# client system can dynamically read and modify these information.
 #
 # For the full copyright and license information, please view
 # the license file that was distributed with this source code.
@@ -45,11 +45,8 @@ class TestK2hr3Resource(unittest.TestCase):
         self.base_url = "http://127.0.0.1:18080"
         self.resource_path = "test_resource_path"
         self.name = "test_resource"
-        # self.project = "test_project"
         self.data_type = 'string'
         self.resource_data = "testresourcedata"
-        self.tenant = "mytenant"
-        self.cluster_name = "mycluster"
         self.keys = {
             "cluster-name": "testcluster",
             "chmpx-server-port": "8020",
@@ -97,8 +94,6 @@ class TestK2hr3Resource(unittest.TestCase):
             name = self.name,
             data_type = self.data_type,
             resource_data = self.resource_data,
-            tenant = self.tenant,
-            cluster_name = self.cluster_name,
             keys = self.keys,
             alias = self.alias)
         httpreq = khttp.K2hr3Http(self.base_url)

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: k2hr3client \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 10:42+0900\n"
+"POT-Creation-Date: 2024-10-04 20:13+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -324,10 +324,6 @@ msgstr "https://k2hr3.antpick.ax/api_resource.html を参照する"
 #: k2hr3client.resource.K2hr3Resource.create_conf_resource:1 of
 msgid "Create the resource."
 msgstr "リソースを作成する"
-
-#: k2hr3client.resource.K2hr3Resource.data:1 of
-msgid "Return data."
-msgstr "データを返す"
 
 #: k2hr3client.resource.K2hr3Resource.delete_with_notoken:1 of
 msgid "Delete the resource without token."
@@ -649,11 +645,11 @@ msgstr "https://k2hr3.antpick.ax/api_version.html を参照する"
 
 #: k2hr3client.version.K2hr3Version.get:1 of
 msgid "Get the version."
-msgstr ""
+msgstr "Version APIからバージョンを取得する"
 
 #: ../../k2hr3client.rst:120
 msgid "Module contents"
-msgstr ""
+msgstr "モジュールのコンテンツ"
 
 #: k2hr3client.get_version:1 of
 #, fuzzy
@@ -673,4 +669,7 @@ msgstr "バージョン"
 #, fuzzy
 msgid "Return type"
 msgstr "データを返す"
+
+#~ msgid "Return data."
+#~ msgstr "データを返す"
 

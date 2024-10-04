@@ -67,8 +67,6 @@ Let's try to get a token and create a resource.::
     ...     name=k2hr3_resource_name,
     ...     data_type="string",
     ...     data="testresourcedata",
-    ...     tenant="demo",
-    ...     cluster_name="testcluster",
     ...     keys={
     ...         "cluster-name": "test-cluster",
     ...         "chmpx-server-port": "8020",
