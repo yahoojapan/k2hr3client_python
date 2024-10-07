@@ -23,7 +23,7 @@
 
 .. code-block:: python
 
-    # Simple CUI application to get registerpath for k2hdkc dbaas.
+    # Simple CUI application to get registerpath for a k2hr3 role.
     from __future__ import (absolute_import, division, print_function,
                             unicode_literals)
     import argparse
@@ -94,7 +94,7 @@
         python_data['auth']['identity']['password']['user']['name'] = user
         python_data['auth']['identity']['password']['user']['password'] = password  # noqa
         headers = {
-            'User-Agent': 'hiwkby-sample',
+            'User-Agent': 'doc_sample',
             'Content-Type': 'application/json'
         }
         req = urllib.request.Request(url,
@@ -111,7 +111,7 @@
         python_data['auth']['identity']['token']['id'] = unscoped_token_id
         python_data['auth']['scope']['project']['name'] = project
         headers = {
-            'User-Agent': 'hiwkby-sample',
+            'User-Agent': 'doc_sample',
             'Content-Type': 'application/json'
         }
         req = urllib.request.Request(url,
@@ -149,7 +149,7 @@
                             help='k2hr3 api url')
         parser.add_argument('--role',
                             dest='role',
-                            default='k2hdkccluster',
+                            default='doc_sample',
                             help='k2hr3 rolename')
         args = parser.parse_args()
 

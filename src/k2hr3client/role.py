@@ -23,7 +23,7 @@
 
 .. code-block:: python
 
-    # Simple CUI application to create a full k2hdkc dbaas resource.
+    # Simple CUI application to create a role.
     from __future__ import (absolute_import, division, print_function,
                             unicode_literals)
     import argparse
@@ -101,7 +101,7 @@
         python_data['auth']['identity']['password']['user']['name'] = user
         python_data['auth']['identity']['password']['user']['password'] = password
         headers = {
-            'User-Agent': 'hiwkby-sample',
+            'User-Agent': 'doc_sample',
             'Content-Type': 'application/json'
         }
         req = urllib.request.Request(url,
@@ -118,7 +118,7 @@
         python_data['auth']['identity']['token']['id'] = unscoped_token_id
         python_data['auth']['scope']['project']['name'] = project
         headers = {
-            'User-Agent': 'hiwkby-sample',
+            'User-Agent': 'doc_sample',
             'Content-Type': 'application/json'
         }
         req = urllib.request.Request(url,
@@ -129,31 +129,6 @@
             scoped_token_id = dict(res.info()).get('X-Subject-Token')
             print('scoped_token_id:[{}]'.format(scoped_token_id))
             return scoped_token_id
-
-
-    def set_data(val: Path, projectname: str, clustername: str) -> str:
-        # Set data.
-        if val.exists() is False:
-            raise K2hr3Exception(f'path must exist, not {val}')
-        if val.is_file() is False:
-            raise K2hr3Exception(
-                f'path must be a regular file, not {val}')
-        data = ""
-        with val.open(encoding='utf-8') as f:  # pylint: disable=no-member
-            line_len = 0
-            for line in iter(f.readline, ''):
-                # 3. replace TROVE_K2HDKC_CLUSTER_NAME with clustername
-                line = re.sub('__TROVE_K2HDKC_CLUSTER_NAME__', clustername,
-                              line)
-                # 4. replace TROVE_K2HDKC_TENANT_NAME with projectname
-                line = re.sub('__TROVE_K2HDKC_TENANT_NAME__', projectname,
-                              line)
-                line_len += len(line)
-                if line_len > _MAX_LINE_LENGTH:
-                    raise K2hr3Exception('data too big')
-                data = "".join([data, line])  # type: ignore
-
-        return data
 
 
     if __name__ == '__main__':
@@ -181,19 +156,15 @@
                             help='k2hr3 api url')
         parser.add_argument('--resource',
                             dest='resource',
-                            default='k2hdkccluster',
+                            default='doc_sample',
                             help='resource name')
-        parser.add_argument('--resource_file',
-                            dest='resource_file',
-                            default=None,
-                            help='resource file name')
         parser.add_argument('--policy',
                             dest='policy',
-                            default='k2hdkccluster',
+                            default='doc_sample',
                             help='policy name')
         parser.add_argument('--role',
                             dest='role',
-                            default='k2hdkccluster',
+                            default='doc_sample',
                             help='k2hr3 rolename')
 
         args = parser.parse_args()
@@ -209,12 +180,7 @@
 
         # 3. Makes a new k2hr3 resource
         k2hr3_resource = K2hr3Resource(k2hr3_token.token)
-        resource_data = ""
-        if args.resource_file:
-            val = Path(args.resource_file)
-            resource_data = set_data(val, projectname=args.project, clustername=args.resource)
-        else:
-            resource_data = args.resource
+        resource_data = args.resource
 
         http.POST(
             k2hr3_resource.create_conf_resource(
@@ -222,58 +188,22 @@
                 data_type='string',
                 resource_data=resource_data,
                 keys={
-                    "cluster-name": args.resource,
-                    "chmpx-server-port": "8020",
-                    "chmpx-server-ctlport": "8021",
-                    "chmpx-slave-ctlport": "8031"
+                    "doc_sample": args.resource
                 },
-                alias=[]
-            )
-        )
-
-        # 3.1. Makes a new k2hr3 resource for server
-        k2hr3_resource_server = K2hr3Resource(k2hr3_token.token)
-        http.POST(
-            k2hr3_resource_server.create_conf_resource(
-                name="/".join([args.resource, "server"]),
-                data_type='string',
-                resource_data="",
-                keys={"chmpx-mode": "SERVER",
-                      "k2hr3-init-packages": "",
-                      "k2hr3-init-packagecloud-packages": "",
-                      "k2hr3-init-systemd-packages": ""},
-                alias=[]
-            )
-        )
-
-        # 3.2. Makes a new k2hr3 resource for slave
-        k2hr3_resource_slave = K2hr3Resource(k2hr3_token.token)
-        http.POST(
-            k2hr3_resource_slave.create_conf_resource(
-                name="/".join([args.resource, "slave"]),
-                data_type='string',
-                resource_data="",
-                keys={"chmpx-mode": "SLAVE",
-                      "k2hr3-init-packages": "",
-                      "k2hr3-init-packagecloud-packages": "",
-                      "k2hr3-init-systemd-packages": "",
-                      "k2hdkc-dbaas-add-user": 1},
                 alias=[]
             )
         )
 
         # 4. Makes a new k2hr3 policy for the resource
         k2hr3_policy = K2hr3Policy(k2hr3_token.token)
-        SERVER_RESOURCE_PATH = "yrn:yahoo:::{}:resource:{}/server".format(
-            args.project, args.resource)
-        SLAVE_RESOURCE_PATH = "yrn:yahoo:::{}:resource:{}/slave".format(
+        MY_RESOURCE_PATH = "yrn:yahoo:::{}:resource:{}/doc_sample".format(
             args.project, args.resource)
         http.POST(
             k2hr3_policy.create(
                 name=args.policy,
                 effect='allow',
                 action=['yrn:yahoo::::action:read'],
-                resource=[SERVER_RESOURCE_PATH, SLAVE_RESOURCE_PATH],
+                resource=[MY_RESOURCE_PATH],
                 condition=None,
                 alias=[]
             )
@@ -286,22 +216,6 @@
             k2hr3_role.create(
                 name=args.role,
                 policies=[POLICY_PATH],
-                alias=[]
-            )
-        )
-        server_role = K2hr3Role(k2hr3_token.token)
-        http.POST(
-            server_role.create(
-                name="/".join([args.role, "server"]),
-                policies=[],
-                alias=[]
-            )
-        )
-        slave_role = K2hr3Role(k2hr3_token.token)
-        http.POST(
-            slave_role.create(
-                name="/".join([args.role, "slave"]),
-                policies=[],
                 alias=[]
             )
         )
