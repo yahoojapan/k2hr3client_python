@@ -3,6 +3,7 @@
 include HISTORY.rst
 include LICENSE
 include README.rst
+include conf/k2hr3client.ini
 
 recursive-include k2hr3client *
 recursive-exclude * __pycache__

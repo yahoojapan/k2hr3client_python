@@ -51,6 +51,7 @@ from urllib.error import ContentTooShortError, HTTPError, URLError
 
 from k2hr3client.api import K2hr3HTTPMethod, K2hr3Api
 from k2hr3client.exception import K2hr3Exception
+from k2hr3client import CONFIG
 
 LOG = logging.getLogger(__name__)
 
@@ -75,12 +76,12 @@ class K2hr3Http():  # pylint: disable=too-many-instance-attributes
     def __init__(self, baseurl: str) -> None:
         """Init the members."""
         self._set_baseurl(baseurl)
-        self._timeout_seconds = 30
+        self._timeout_seconds = CONFIG['http'].getint('timeout_seconds')
         self._url = None  # type: Optional[str]
         self._urlparams = None  # type: Optional[str]
-        self._retry_interval_seconds = 60  # type: int
-        self._retries = 3  # type: int
-        self._allow_self_signed_cert = True  # type: bool
+        self._retry_interval_seconds = CONFIG['http'].getint('retry_interval_seconds')  # noqa
+        self._retries = CONFIG['http'].getint('retries')
+        self._allow_self_signed_cert = CONFIG['http'].getboolean('allow_self_signed_cert')  # noqa
 
     def __repr__(self) -> str:
         """Represent the members."""
