@@ -22,8 +22,10 @@
 """K2HR3 Python Client of Token API."""
 
 __author__ = 'Hirotaka Wakabayashi <hiwakaba@lycorp.co.jp>'
-__version__ = '1.1.0'
+__version__ = '1.1.1'
 
+import configparser
+from pathlib import Path
 import sys
 
 if sys.platform.startswith('win'):
@@ -38,6 +40,65 @@ def get_version() -> str:
     """
     return __version__
 
+
+# 1. Defines the default config as a package level variable.
+CONFIG = configparser.ConfigParser()
+# [DEFAULT]
+# debug = False
+# iaas_url = http://172.24.4.1
+# iaas_project = demo
+# iaas_user = demo
+# iaas_password = password
+# log_file = sys.stdout
+# log_dir = logs
+# log_format = %(asctime)-15s %(levelname)s %(name)s %(message)s
+# log_level = logging.INFO
+default_section = CONFIG['DEFAULT']
+default_section['debug'] = "False"
+default_section['iaas_url'] = "http://172.24.4.1"
+default_section['iaas_project'] = "demo"
+default_section['iaas_user'] = "demo"
+default_section['iaas_password'] = "password"
+default_section['log_file'] = "sys.stderr"
+default_section['log_dir'] = "logs"
+default_section['log_level'] = "logging.INFO"
+
+# [k2hr3]
+# api_url = "http://127.0.0.1:18080"
+# api_version = "v1"
+CONFIG['k2hr3'] = {}
+k2hr3_section = CONFIG['k2hr3']
+k2hr3_section['api_url'] = "http://127.0.0.1:18080"
+k2hr3_section['api_version'] = "v1"
+
+# [http]
+# timeout_seconds = 30
+# retry_interval_seconds = 60
+# max_retries = 3
+# allow_self_signed_cert = True
+CONFIG['http'] = {}
+http_section = CONFIG['http']
+http_section['timeout_seconds'] = "30"
+http_section['retry_interval_seconds'] = "60"
+http_section['max_retries'] = "3"
+http_section['allow_self_signed_cert'] = "True"
+
+# 2. Overrides the default config by the config file.
+# Find the config using precedence of the location:
+#   ./k2hr3client.ini
+#   ~/.k2hr3client.ini
+#   /etc/antpickax/k2hr3client.ini
+# NOTE:
+# Using the configuration value may occur KeyError.
+# All values are string. Use getboolean or something.
+config_path = [Path("k2hr3client.ini"),
+               Path(Path.home() / '.k2hr3client.ini'),
+               Path('/etc/antpickax/k2hr3client.ini')]
+for my_config in config_path:
+    if my_config.is_file():
+        # Override the value if the key is defined.
+        CONFIG.read(my_config.absolute())
+        break
 
 #
 # Local variables:
