@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: k2hr3client \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 15:10+0900\n"
+"POT-Creation-Date: 2024-10-11 16:22+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -26,74 +26,82 @@ msgid "History"
 msgstr "歴史"
 
 #: ../../../HISTORY.rst:6
-msgid "1.1.1 (2024-10-09)"
+msgid "1.1.2 (2024-10-11)"
 msgstr ""
 
 #: ../../../HISTORY.rst:8
+msgid "Enables logging to a file"
+msgstr "ログファイルへのログ出力をサポート"
+
+#: ../../../HISTORY.rst:10
+msgid "1.1.1 (2024-10-09)"
+msgstr ""
+
+#: ../../../HISTORY.rst:13
 msgid "Removes hardcodings"
 msgstr "ハードコーディングを削除"
 
-#: ../../../HISTORY.rst:9
+#: ../../../HISTORY.rst:14
 msgid "Adds Configuration Interface"
 msgstr "設定用インターフェースを追加"
 
-#: ../../../HISTORY.rst:10 ../../../HISTORY.rst:17
+#: ../../../HISTORY.rst:15 ../../../HISTORY.rst:22
 msgid "Updates the docs"
 msgstr "ドキュメントの更新"
 
-#: ../../../HISTORY.rst:13
+#: ../../../HISTORY.rst:18
 msgid "1.1.0 (2024-10-04)"
 msgstr ""
 
-#: ../../../HISTORY.rst:15
+#: ../../../HISTORY.rst:20
 msgid "Removes the deprecated Interfaces"
 msgstr "非推奨のインタフェースを削除"
 
-#: ../../../HISTORY.rst:16
+#: ../../../HISTORY.rst:21
 msgid "Removes the examples"
 msgstr "例示プログラムの削除"
 
-#: ../../../HISTORY.rst:20
+#: ../../../HISTORY.rst:25
 msgid "1.0.3 (2024-10-03)"
 msgstr ""
 
-#: ../../../HISTORY.rst:22
+#: ../../../HISTORY.rst:27
 msgid "Fixes the K2hr3 API version"
 msgstr "K2hr3 APIのバージョンを固定化"
 
-#: ../../../HISTORY.rst:23
+#: ../../../HISTORY.rst:28
 msgid "Deprecates K2hr3Resource.create_conf_resource params"
 msgstr "K2hr3Resource.create_conf_resourceのパラメータを一部非推奨化"
 
-#: ../../../HISTORY.rst:26
+#: ../../../HISTORY.rst:31
 msgid "1.0.2 (2024-09-26)"
 msgstr ""
 
-#: ../../../HISTORY.rst:28
+#: ../../../HISTORY.rst:33
 msgid "Fixes lint errors"
 msgstr "静的解析ツールのエラーを修正"
 
-#: ../../../HISTORY.rst:31
+#: ../../../HISTORY.rst:36
 msgid "1.0.1 (2024-09-25)"
 msgstr ""
 
-#: ../../../HISTORY.rst:33
+#: ../../../HISTORY.rst:38
 msgid "Fixes resource API bugs"
 msgstr "Resource APIの不具合を修正"
 
-#: ../../../HISTORY.rst:36
+#: ../../../HISTORY.rst:41
 msgid "1.0.0 (2024-08-28)"
 msgstr ""
 
-#: ../../../HISTORY.rst:38
+#: ../../../HISTORY.rst:43
 msgid "Supports the other APIs"
 msgstr "他のAPIをサポート"
 
-#: ../../../HISTORY.rst:41
+#: ../../../HISTORY.rst:46
 msgid "0.0.1 (2020-08-28)"
 msgstr ""
 
-#: ../../../HISTORY.rst:43
+#: ../../../HISTORY.rst:48
 msgid "Supports Token, Resource, Policy and Role API"
 msgstr "トークン、リソース、ポリシーおよびロールAPIをサポート"
 

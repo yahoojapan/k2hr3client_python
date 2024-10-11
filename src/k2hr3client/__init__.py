@@ -22,11 +22,16 @@
 """K2HR3 Python Client of Token API."""
 
 __author__ = 'Hirotaka Wakabayashi <hiwakaba@lycorp.co.jp>'
-__version__ = '1.1.1'
+__version__ = '1.1.2'
 
 import configparser
+import logging
+from logging.handlers import TimedRotatingFileHandler
+from logging import StreamHandler
 from pathlib import Path
 import sys
+
+LOG = logging.getLogger(__name__)
 
 if sys.platform.startswith('win'):
     raise ImportError(r'Currently we do not test well on windows')
@@ -61,7 +66,7 @@ default_section['iaas_user'] = "demo"
 default_section['iaas_password'] = "password"
 default_section['log_file'] = "sys.stderr"
 default_section['log_dir'] = "logs"
-default_section['log_level'] = "logging.INFO"
+default_section['log_level'] = "info"
 
 # [k2hr3]
 # api_url = "http://127.0.0.1:18080"
@@ -99,6 +104,55 @@ for my_config in config_path:
         # Override the value if the key is defined.
         CONFIG.read(my_config.absolute())
         break
+
+# 3. Configure logger
+# 3.1. loglevel
+_nametolevel = {
+    'error': logging.ERROR,
+    'warn': logging.WARNING,
+    'info': logging.INFO,
+    'debug': logging.DEBUG,
+    'notset': logging.NOTSET
+}
+LOG_LEVEL = logging.INFO  # noqa
+if CONFIG['DEFAULT'].get('log_level'):
+    LOG_LEVEL = _nametolevel.get(
+        CONFIG['DEFAULT'].get('log_level'),
+        logging.INFO)
+LOG.setLevel(LOG_LEVEL)
+
+# 3.2. format
+formatter = logging.Formatter(
+    '%(asctime)-15s %(levelname)s %(name)s:%(lineno)d %(message)s')
+# 3.3. handler
+# Add the log message handler to the logger
+if CONFIG['DEFAULT'].get('log_file') == 'sys.stdout':
+    stream_handler = StreamHandler(sys.stdout)
+    LOG.addHandler(stream_handler)
+    stream_handler.setFormatter(formatter)
+elif CONFIG['DEFAULT'].get('log_file') == 'sys.stderr':
+    stream_handler = StreamHandler(sys.stderr)  # default
+    LOG.addHandler(stream_handler)
+    stream_handler.setFormatter(formatter)
+
+# log_dir
+log_dir_path = Path('.')  # default
+log_dir = CONFIG['DEFAULT'].get('log_dir')
+if log_dir:
+    log_dir_path = Path(log_dir)
+    log_dir_path.mkdir(parents=True, exist_ok=True)
+
+# log_file
+log_file = CONFIG['DEFAULT'].get('log_file')
+if log_file:
+    log_file_path = log_dir_path.joinpath(log_file)
+    log_file_path.touch()
+    handler = TimedRotatingFileHandler(
+                  log_file_path.absolute(),
+                  when='midnight', encoding='UTF-8',
+                  backupCount=31)
+    handler.setFormatter(formatter)
+    LOG.addHandler(handler)
 
 #
 # Local variables:
