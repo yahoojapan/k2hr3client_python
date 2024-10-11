@@ -76,6 +76,57 @@ Let's try to get a token and create a resource.::
     ... )
     >>> myresource.resp.body // {"result":true...
 
+
+Settings
+---------
+
+To customize the settings of this library, place the configuration file in one of the following locations.::
+
+    $PWD/k2hr3client.ini
+    $HOME/.k2hr3client.ini
+    /etc/antpickax/k2hr3client.ini
+
+To use the settings in your program, see the following example.::
+
+    >>> from k2hr3client import CONFIG
+    >>> print(CONFIG['DEFAULT']['iaas_user'])
+    demo
+
+Here are the default settings.
+
++---------+------------------------+-------------------------------------------------+------------------------+
+| section | key name               | description                                     | default value          |
++=========+========================+=================================================+========================+
+| DEFAULT | debug                  | Enable debug log if True                        | False                  |
++---------+------------------------+-------------------------------------------------+------------------------+
+| DEFAULT | iaas_url               | IaaS API URL(OpenStack)                         | http://172.24.4.1      |
++---------+------------------------+-------------------------------------------------+------------------------+
+| DEFAULT | iaas_project           | IaaS project name                               | demo                   |
++---------+------------------------+-------------------------------------------------+------------------------+
+| DEFAULT | iaas_user              | IaaS user name                                  | demo                   |
++---------+------------------------+-------------------------------------------------+------------------------+
+| DEFAULT | iaas_password          | IaaS password of the user                       | password               |
++---------+------------------------+-------------------------------------------------+------------------------+
+| DEFAULT | log_file               | log file name                                   | sys.stderr             |
++---------+------------------------+-------------------------------------------------+------------------------+
+| DEFAULT | log_dir                | log directory name                              | logs                   |
++---------+------------------------+-------------------------------------------------+------------------------+
+| DEFAULT | log_level              | log level(error,warn,info,debug,notset)         | info                   |
++---------+------------------------+-------------------------------------------------+------------------------+
+| k2hr3   | api_url                | k2hr3 API URL                                   | http://127.0.0.1:18080 |
++---------+------------------------+-------------------------------------------------+------------------------+
+| k2hr3   | api_version            | k2hr3 api version                               | v1                     |
++---------+------------------------+-------------------------------------------------+------------------------+
+| http    | timeout_seconds        | timeout to establish tcp connections            | 30                     |
++---------+------------------------+-------------------------------------------------+------------------------+
+| http    | retry_interval_seconds | interval to reconnect with HTTP server          | 60                     |
++---------+------------------------+-------------------------------------------------+------------------------+
+| http    | max_retries            | maximum count to reconnect with HTTP server     | 3                      |
++---------+------------------------+-------------------------------------------------+------------------------+
+| http    | allow_self_signed_cert | Allow to use self-signed certification in HTTPS | False                  |
++---------+------------------------+-------------------------------------------------+------------------------+
+
+
 Development
 ------------
 
