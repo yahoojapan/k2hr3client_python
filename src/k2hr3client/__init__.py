@@ -117,7 +117,7 @@ _nametolevel = {
 LOG_LEVEL = logging.INFO  # noqa
 if CONFIG['DEFAULT'].get('log_level'):
     LOG_LEVEL = _nametolevel.get(
-        CONFIG['DEFAULT'].get('log_level'),
+        CONFIG['DEFAULT'].get('log_level'),  # type: ignore
         logging.INFO)
 LOG.setLevel(LOG_LEVEL)
 

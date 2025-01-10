@@ -241,12 +241,12 @@ class K2hr3Http():  # pylint: disable=too-many-instance-attributes
             agent_error = _AgentError.TEMP
         finally:
             if agent_error == _AgentError.TEMP:
-                self._retries -= 1  # decrement the retries value.
+                self._retries -= 1  # type: ignore
                 if self._retries >= 0:
                     LOG.warning('sleeping for %s. remaining retries=%s',
                                 self._retry_interval_seconds,
                                 self._retries)
-                    time.sleep(self._retry_interval_seconds)
+                    time.sleep(self._retry_interval_seconds)    # type: ignore
                     self.GET(r3api)
                 else:
                     LOG.error("reached the max retry count.")
