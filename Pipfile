@@ -25,3 +25,4 @@ tomli = "*"
 dill = "*"
 
 [packages]
+requests = "*"
