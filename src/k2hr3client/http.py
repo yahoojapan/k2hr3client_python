@@ -279,8 +279,8 @@ class K2hr3Http():  # pylint: disable=too-many-instance-attributes
         self.urlparams = query
 
         # 3. Constructs headers using K2hr3Api.headers property.
-        if self._hdrs:
-            self._hdrs.update(r3api.headers)
+        if self._hdrs:  # type: dict
+            self._hdrs.update(r3api.headers)  # type: dict
 
         # 4. Sends a request.
         req = urllib.request.Request(self.url, data=query,  # type: ignore
@@ -303,8 +303,8 @@ class K2hr3Http():  # pylint: disable=too-many-instance-attributes
         self.urlparams = query
 
         # 3. Constructs headers using K2hr3Api.headers property.
-        if self._hdrs:
-            self._hdrs.update(r3api.headers)
+        if self._hdrs:  # type: dict
+            self._hdrs.update(r3api.headers)  # type: dict
 
         # 5. Sends a request.
         req = urllib.request.Request("?".join([self.url, self.urlparams]),
@@ -334,8 +334,8 @@ class K2hr3Http():  # pylint: disable=too-many-instance-attributes
             url = "?".join([self.url, self.urlparams])
 
         # 3. Constructs headers using K2hr3Api.headers property.
-        if self._hdrs:
-            self._hdrs.update(r3api.headers)
+        if self._hdrs:  # type: ignore
+            self._hdrs.update(r3api.headers)  # type: ignore
 
         # 4. Sends a request.
         req = urllib.request.Request(url, headers=self._hdrs, method="GET")  # type: ignore  # noqa
@@ -363,8 +363,8 @@ class K2hr3Http():  # pylint: disable=too-many-instance-attributes
             url = "?".join([self.url, self.urlparams])
 
         # 3. Constructs headers using K2hr3Api.headers property.
-        if self._hdrs:
-            self._hdrs.update(r3api.headers)  # type: ignore
+        if self._hdrs:  # type: dict
+            self._hdrs.update(r3api.headers)  # type: dict
 
         # 4. Sends a request.
         # NOTE: headers is expected "MutableMapping[str, str]"
@@ -393,8 +393,8 @@ class K2hr3Http():  # pylint: disable=too-many-instance-attributes
             url = "?".join([self.url, self.urlparams])
 
         # 3. Constructs headers using K2hr3Api.headers property.
-        if self._hdrs:
-            self._hdrs.update(r3api.headers)  # type: ignore
+        if self._hdrs:  # type: dict
+            self._hdrs.update(r3api.headers)  # type: dict
 
         # 4. Sends a request.
         # NOTE: headers is expected "MutableMapping[str, str]"
