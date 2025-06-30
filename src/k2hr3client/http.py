@@ -279,7 +279,7 @@ class K2hr3Http():  # pylint: disable=too-many-instance-attributes
         self.urlparams = query
 
         # 3. Constructs headers using K2hr3Api.headers property.
-        if self._hdrs:
+        if self._hdrs:  # type: ignore
             self._hdrs.update(r3api.headers)
 
         # 4. Sends a request.
@@ -303,7 +303,7 @@ class K2hr3Http():  # pylint: disable=too-many-instance-attributes
         self.urlparams = query
 
         # 3. Constructs headers using K2hr3Api.headers property.
-        if self._hdrs:
+        if self._hdrs:  # type: ignore
             self._hdrs.update(r3api.headers)
 
         # 5. Sends a request.
@@ -334,7 +334,7 @@ class K2hr3Http():  # pylint: disable=too-many-instance-attributes
             url = "?".join([self.url, self.urlparams])
 
         # 3. Constructs headers using K2hr3Api.headers property.
-        if self._hdrs:
+        if self._hdrs:  # type: ignore
             self._hdrs.update(r3api.headers)
 
         # 4. Sends a request.
@@ -363,8 +363,8 @@ class K2hr3Http():  # pylint: disable=too-many-instance-attributes
             url = "?".join([self.url, self.urlparams])
 
         # 3. Constructs headers using K2hr3Api.headers property.
-        if self._hdrs:
-            self._hdrs.update(r3api.headers)  # type: ignore
+        if self._hdrs:  # type: ignore
+            self._hdrs.update(r3api.headers)
 
         # 4. Sends a request.
         # NOTE: headers is expected "MutableMapping[str, str]"
@@ -393,8 +393,8 @@ class K2hr3Http():  # pylint: disable=too-many-instance-attributes
             url = "?".join([self.url, self.urlparams])
 
         # 3. Constructs headers using K2hr3Api.headers property.
-        if self._hdrs:
-            self._hdrs.update(r3api.headers)  # type: ignore
+        if self._hdrs:  # type: ignore
+            self._hdrs.update(r3api.headers)
 
         # 4. Sends a request.
         # NOTE: headers is expected "MutableMapping[str, str]"
