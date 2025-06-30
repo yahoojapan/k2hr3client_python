@@ -26,3 +26,4 @@ dill = "*"
 
 [packages]
 requests = "*"
+urllib3 = "*"
