@@ -35,12 +35,12 @@
     # POST a request to create a token to K2HR3 Token API.
     myhttp = K2hr3Http("http://127.0.0.1:18080")
     myhttp.POST(mytoken.create())
-    mytoken.token  // gAAAAA...
+    mytoken.token  # gAAAAA...
 
     # GET a request to get list from K2HR3 List API.
     mylist = K2hr3List(mytoken.token, "service")
     myhttp.GET(mylist.get())
-    mylist.resp.body // {"result":true...
+    mylist.resp.body # {"result":true...
 
 """
 

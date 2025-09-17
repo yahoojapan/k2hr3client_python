@@ -57,7 +57,7 @@ Let's try to get a token and create a resource.::
     >>> k2hr3_token_url = "http://127.0.0.1:18080"
     >>> myhttp = K2hr3Http(k2hr3_token_url)
     >>> myhttp.POST(mytoken.create())
-    >>> mytoken.token  // k2hr3 token
+    >>> mytoken.token  # k2hr3 token
     >>>
     >>> from k2hr3client.resource import K2hr3Resource
     >>> k2hr3_resource_name = "test_resource"
@@ -74,7 +74,7 @@ Let's try to get a token and create a resource.::
     ...         "chmpx-slave-ctrlport": "8031"},
     ...     alias=[])
     ... )
-    >>> myresource.resp.body // {"result":true...
+    >>> myresource.resp.body # {"result":true...
 
 
 Settings

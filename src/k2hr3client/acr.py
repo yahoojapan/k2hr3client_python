@@ -36,7 +36,7 @@
     # POST a request to create a token to K2HR3 Token API.
     myhttp = K2hr3Http("http://127.0.0.1:18080")
     myhttp.POST(mytoken.create())
-    mytoken.token  // gAAAAA...
+    mytoken.token  # gAAAAA...
 
     # POST a request to add member to K2HR3 ACR API.
     myacr = K2hr3Acr(mytoken.token, "service")

@@ -159,6 +159,42 @@ class TestK2hr3Resource(unittest.TestCase):
         self.assertEqual(myresource.body, None)
 
     #
+    # TestCases using GET Requests that include service=None
+    #
+    # GET
+    # http(s)://API SERVER:PORT/v1/resource/resource path or yrn full resource path?urlarg # noqa
+    # http(s)://API SERVER:PORT/v1/resource/resource path or yrn full resource path?urlarg # noqa
+    # http(s)://API SERVER:PORT/v1/resource/yrn full resource path?urlarg
+    #
+    @patch('k2hr3client.http.K2hr3Http._HTTP_REQUEST_METHOD')
+    def test_resource_get_resource_using_get_service_none(self, mock_HTTP_REQUEST_METHOD):
+        myresource = kresource.K2hr3Resource("token",
+                                             resource_path=self.resource_path)
+        self.assertEqual(myresource.r3token, "token")
+        """Get root path."""
+        myresource.get(self.expand, None)
+        httpreq = khttp.K2hr3Http(self.base_url)
+        self.assertTrue(httpreq.GET(myresource))
+
+        # 1. assert URL
+        self.assertEqual(httpreq.url, f"{self.base_url}/v1/resource/{self.resource_path}") # noqa
+        # 2. assert URL params
+        # NOTE(hiwkby) urlparams should not include the service param.
+        s_s_urlparams_without_service = {
+            'expand': self.expand
+        }
+        s_urlparams_without_service = urllib.parse.urlencode(s_s_urlparams_without_service)
+        self.assertEqual(httpreq.urlparams, f"{s_urlparams_without_service}")
+        # 3. assert Request headers
+        headers = {
+            'Content-Type': 'application/json',
+            'x-auth-token': 'U=token'
+        }
+        self.assertEqual(myresource.headers, headers)
+        # 4. assert Request body
+        self.assertEqual(myresource.body, None)
+
+    #
     # TestCases using GET Requests
     #
     # GET

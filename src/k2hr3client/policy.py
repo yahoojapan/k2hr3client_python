@@ -35,7 +35,7 @@
     # POST a request to create a token to K2HR3 Token API.
     myhttp = K2hr3Http("http://127.0.0.1:18080")
     myhttp.POST(mytoken.create())
-    mytoken.token  // gAAAAA...
+    mytoken.token  # gAAAAA...
 
     # POST request to get a K2HR3 Policy API.
     mypolicy = K2hr3Policy(mytoken.token)
@@ -50,7 +50,7 @@
             alias=[]
             )
         )
-    mypolicy.resp.body // {"result":true...
+    mypolicy.resp.body # {"result":true...
 
 """
 

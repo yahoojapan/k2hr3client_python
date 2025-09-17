@@ -34,7 +34,7 @@
     myhttp.GET(
         myuserdata.provides_userdata_script()
     )
-    myuserdata.resp.body // {"result":true...
+    myuserdata.resp.body # {"result":true...
 
 """
 import logging

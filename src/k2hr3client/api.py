@@ -28,6 +28,7 @@ k2hr3client - Python library for K2HR3 API.
     # Import modules from k2hr3client package
     from k2hr3client import version
     v = version.K2hr3Version()
+    v.get()
     from k2hr3client import http as khttp
     httpreq = khttp.K2hr3Http('http://127.0.0.1:18080')
 

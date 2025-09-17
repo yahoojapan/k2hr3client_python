@@ -35,7 +35,7 @@
     # POST a request to create a token to K2HR3 Token API.
     myhttp = K2hr3Http("http://127.0.0.1:18080")
     myhttp.POST(mytoken.create())
-    mytoken.token  // gAAAAA...
+    mytoken.token  # gAAAAA...
 
     # POST a request to create a K2HDKC resource.
     myresource = K2hr3Resource(mytoken.token)
@@ -51,7 +51,7 @@
                 "chmpx-slave-ctrlport": "8031"},
             alias=[])
         )
-    myresource.resp.body // {"result":true...
+    myresource.resp.body # {"result":true...
 
 """
 
@@ -350,6 +350,15 @@ class K2hr3Resource(K2hr3Api):  # pylint: disable=too-many-instance-attributes
         if getattr(self, '_resource_path', None) is None:
             self._resource_path = val
 
+    @staticmethod
+    def json_dumps(params):
+        """Return the json params after deleting None data."""
+        for k in list(params.keys()):
+            if params[k] is None:
+                del params[k]
+        json_params = json.dumps(params)
+        return json_params
+
     #
     # abstract methos that must be implemented in subclasses
     #
@@ -380,29 +389,32 @@ class K2hr3Resource(K2hr3Api):  # pylint: disable=too-many-instance-attributes
                     return f'{self.version}/{self.basepath}'
                 return f'{self.version}/{self.basepath}/{self.resource_path}'
         if method == K2hr3HTTPMethod.GET:
+            # NOTE(hiwkby): service should not be passed if it is None.
             if self.api_id == 3:
-                self.urlparams = json.dumps({
+                self.urlparams = K2hr3Resource.json_dumps({
                     'expand': self.expand,
                     'service': self.service
                 })
                 return f'{self.version}/{self.basepath}/{self.resource_path}'
             if self.api_id == 4:
-                self.urlparams = json.dumps({
+                self.urlparams = K2hr3Resource.json_dumps({
                     'type': self.data_type,
                     'keys': self.keys,
                     'service': self.service
                 })
                 return f'{self.version}/{self.basepath}/{self.resource_path}'
         if method == K2hr3HTTPMethod.HEAD:
+            # NOTE(hiwkby): service should not be passed if it is None.
             if self.api_id == 5:
-                self.urlparams = json.dumps({
+                self.urlparams = K2hr3Resource.json_dumps({
                     'type': self.data_type,
                     'keys': self.keys,
                     'service': self.service
                 })
                 return f'{self.version}/{self.basepath}/{self.resource_path}'
+            # NOTE(hiwkby): service should not be passed if it is None.
             if self.api_id == 6:
-                self.urlparams = json.dumps({
+                self.urlparams = K2hr3Resource.json_dumps({
                     'port': self.port,
                     'cuk': self.cuk,
                     'role': self.role,

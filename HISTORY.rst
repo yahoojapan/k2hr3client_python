@@ -2,6 +2,16 @@
 History
 =======
 
+1.1.3 (2025-09-18)
+-------------------
+
+* Removes the eol product from dependencies by @hiwakaba
+* Updates packages by @hiwakaba
+* Update dependencies by @hiwakaba
+* Update dependencies by @hiwakaba
+* Updates requests by @hiwakaba
+* Fix the docs by @hiwakaba
+
 1.1.2 (2024-10-11)
 -------------------
 

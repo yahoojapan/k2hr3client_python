@@ -35,7 +35,7 @@
     # POST a request to create a token to K2HR3 Token API.
     myhttp = K2hr3Http("http://127.0.0.1:18080")
     myhttp.POST(mytoken.create())
-    mytoken.token  // gAAAAA...
+    mytoken.token  # gAAAAA...
 
     # POST a request to create a service to K2HR3 Service API.
     myservice = K2hr3Service(mytoken.token, "test_service")
@@ -44,7 +44,7 @@
             verify = "http://example.com/verify_url.php"
         )
     )
-    myservice.resp.body // {"result":true...
+    myservice.resp.body # {"result":true...
 
 """
 
