@@ -27,3 +27,4 @@ dill = "*"
 [packages]
 requests = "*"
 urllib3 = "*"
+setuptools = "*"
