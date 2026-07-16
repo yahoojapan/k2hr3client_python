@@ -29,6 +29,34 @@ classifiers = [
   'Programming Language :: Python :: 3',
   'Programming Language :: Python :: 3.9',
 ]
+dependencies = [
+  "requests",
+  "urllib3",
+  "setuptools",
+]
+
+[project.optional-dependencies]
+dev = [
+  "coverage",
+  "flake8",
+  "flake8-docstrings",
+  "pep8-naming",
+  "pycodestyle",
+  "mccabe",
+  "sphinx-autoapi",
+  "sphinx-intl",
+  "sphinx-rtd-theme",
+  "sphinx",
+  "watchdog",
+  "wheel",
+  "twine",
+  "pylint",
+  "astroid",
+  "mypy",
+  "collective.checkdocs",
+  "tomli",
+  "dill",
+]
 
 [project.urls]
 Homepage = "https://github.com/yahoojapan/k2hr3client_python"
@@ -46,6 +74,9 @@ include-package-data = true
 [tool.setuptools.packages.find]
 exclude = ["tests*"]
 where = ["src"]
+
+[tool.setuptools.dynamic]
+version = {attr = "k2hr3client.__version__"}
 
 [tool.tox]
 legacy_tox_ini = """
