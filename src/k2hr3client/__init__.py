@@ -52,6 +52,10 @@ def get_version() -> str:
     return __version__
 
 
+# Import submodules for direct access
+from k2hr3client import version  # noqa: E402, F401
+
+
 # 1. Defines the default config as a package level variable.
 CONFIG = configparser.ConfigParser()
 # [DEFAULT]
