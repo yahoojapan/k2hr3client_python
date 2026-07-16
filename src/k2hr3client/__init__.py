@@ -26,7 +26,8 @@ __author__ = 'Hirotaka Wakabayashi <hiwakaba@lycorp.co.jp>'
 import configparser
 import logging
 import sys
-from importlib.metadata import PackageNotFoundError, version as get_version_info
+from importlib.metadata import PackageNotFoundError, \
+    version as get_version_info
 from logging import StreamHandler
 from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
