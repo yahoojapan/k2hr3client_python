@@ -23,10 +23,7 @@
 
 __author__ = 'Hirotaka Wakabayashi <hiwakaba@lycorp.co.jp>'
 
-try:
-    from importlib.metadata import version, PackageNotFoundError
-except ImportError:
-    from importlib_metadata import version, PackageNotFoundError
+from importlib.metadata import version, PackageNotFoundError
 
 try:
     __version__ = version("k2hr3client")
