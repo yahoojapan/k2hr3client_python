@@ -22,14 +22,23 @@
 """K2HR3 Python Client of Token API."""
 
 __author__ = 'Hirotaka Wakabayashi <hiwakaba@lycorp.co.jp>'
-__version__ = '1.1.3'
 
 import configparser
 import logging
-from logging.handlers import TimedRotatingFileHandler
-from logging import StreamHandler
-from pathlib import Path
 import sys
+from importlib.metadata import PackageNotFoundError, \
+    version as get_version_info
+from logging import StreamHandler
+from logging.handlers import TimedRotatingFileHandler
+from pathlib import Path
+
+from k2hr3client import version  # noqa: F401
+
+
+try:
+    __version__ = get_version_info("k2hr3client")
+except PackageNotFoundError:
+    __version__ = "unknown"
 
 LOG = logging.getLogger(__name__)
 

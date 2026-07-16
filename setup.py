@@ -52,28 +52,8 @@ THE SOFTWARE.
 # Always prefer setuptools over distutils
 from setuptools import setup
 
-
-def get_version():
-    """Returns the package version from __ini__.py."""
-    from pathlib import Path
-    from os import path, sep
-    import re
-
-    here = path.abspath(path.dirname(__file__))
-    init_py = Path(sep.join([here, 'src', 'k2hr3client', '__init__.py'])).resolve()
-
-    with init_py.open() as fp:
-        for line in fp:
-            version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
-                                      line.strip(), re.M)
-            if version_match:
-                return version_match.group(1)
-    raise RuntimeError('version expected, but no version found.')
-
-
-setup(
-    version=get_version(),
-)
+# All configuration is now in pyproject.toml
+setup()
 
 #
 # Local variables:

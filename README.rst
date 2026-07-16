@@ -133,7 +133,6 @@ Development
 Clone this repository and go into the directory, then run the following command::
 
     $ make init
-    $ pipenv shell
     $ make lint test docs build
 
 

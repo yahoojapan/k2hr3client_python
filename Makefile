@@ -49,11 +49,9 @@ BROWSER := python3 -c "$$BROWSER_PYSCRIPT"
 help:
 	@python3 -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
-init:
-	python3 -m pip install pipenv
-	pipenv install --skip-lock
-	pipenv graph
-	pipenv install --dev
+init: ## Install dependencies and development dependencies
+	python3 -m pip install -e .
+	python3 -m pip install -e ".[dev]"
 
 clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
 
