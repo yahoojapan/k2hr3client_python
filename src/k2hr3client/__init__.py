@@ -26,14 +26,14 @@ __author__ = 'Hirotaka Wakabayashi <hiwakaba@lycorp.co.jp>'
 import configparser
 import logging
 import sys
-from importlib.metadata import PackageNotFoundError, version
+from importlib.metadata import PackageNotFoundError, version as get_version_info
 from logging import StreamHandler
 from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
 
 
 try:
-    __version__ = version("k2hr3client")
+    __version__ = get_version_info("k2hr3client")
 except PackageNotFoundError:
     __version__ = "unknown"
 
